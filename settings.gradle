@@ -1,0 +1,3 @@
+include ':lb-service'
+include ':app'
+rootProject.name = "lb-extend-service"
