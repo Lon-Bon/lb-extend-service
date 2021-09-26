@@ -22,9 +22,304 @@ dependencies {
 }
 ```
 
-## 合作小伙伴如何使用
+## 如何使用
 
-参考：https://github.com/zhanggaoming/android-ipc#readme
+- ##### 来邦这边统一定义通信接口，接口用BindImpl注解修饰，注解的值为服务端实现这个接口的全类名：
+
+```kotlin
+@BindImpl("com.demo.ipc.InfoServiceManager")
+interface InfoService {
+
+    fun asyncGetUserInfo(callBack: Result<UserInfo>)
+
+    fun syncGetUserInfo(): UserInfo
+
+    fun sum(a: Int, b: Int, c: Int, result: Result<Int>)
+
+    fun sendBigData(@BigData data: ByteArray)
+
+    fun getEnum(code: Code): Code
+
+    fun setEventCallBack(callBack: Result<Event>)
+
+}
+
+enum class Code {
+    SUCCESS, FAILURE
+}
+
+
+data class Event(val id: Int)
+
+
+data class UserInfo(val name: String, val age: Int)
+```
+
+上述接口定义支持回调的方式，定义回调的接口返回，必须使用**Result**类来承载
+
+- ##### 来邦app：
+
+来邦app实现上述接口，kotlin代码需要是object类：
+
+```kotlin
+object InfoServiceManager : InfoService {
+
+    //获取userInfo，走的是回调的方式
+    override fun asyncGetUserInfo(callBack: Result<UserInfo>) {
+        thread {
+            callBack.onData(UserInfo("asyncGetUserInfo", 20))
+        }
+    }
+
+
+    override fun syncGetUserInfo(): UserInfo {
+        return UserInfo("syncGetUserInfo", 18)
+    }
+
+
+    override fun sum(a: Int, b: Int, c: Int, result: Result<Int>) {
+        result.onData(a + b + c)
+    }
+
+    override fun sendBigData(data: ByteArray) {
+        Log.i(TAG, "sendBigData: ${data.contentToString()}")
+    }
+
+    override fun getEnum(code: Code): Code {
+        Log.i(TAG, "getEnum: $code")
+        return Code.SUCCESS
+    }
+
+    private var count=0
+
+    private var mCallBack: Result<Event>? = null
+
+    init {
+
+        thread {//模拟回调事件回复客户端
+            while (true) {
+                mCallBack?.onData(Event(count++))
+
+                Thread.sleep(2000)
+            }
+        }
+    }
+
+    override fun setEventCallBack(callBack: Result<Event>) {
+        mCallBack = callBack
+    }
+}
+```
+
+java代码必须要写**getInstance**方法，返回自身，使用单例模式：
+
+```java
+public class InfoServiceManagerJava implements InfoService {
+    private static final String TAG = "InfoServiceManagerJava";
+
+    @Override
+    public void sum(int a, int b, int c, @NotNull Result<Integer> result) {
+        result.onData(a + b + c);
+    }
+
+    @Override
+    public void sendBigData(@NotNull byte[] data) {
+        Log.i(TAG, "sendBigData: " + Arrays.toString(data));
+    }
+
+    @NotNull
+    @Override
+    public Code getEnum(Code code) {
+        return Code.SUCCESS;
+    }
+
+    @Override
+    public void setEventCallBack(@NotNull Result<Event> callBack) {
+
+    }
+
+    private static final class Holder {
+        private static final InfoServiceManagerJava instance = new InfoServiceManagerJava();
+    }
+
+    private InfoServiceManagerJava() {
+
+    }
+
+    public static InfoServiceManagerJava getInstance() {
+        return Holder.instance;
+    }
+
+    @Override
+    public void asyncGetUserInfo(@NotNull Result<UserInfo> callBack) {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                callBack.onData(new UserInfo("asyncGetUserInfo", 24));
+            }
+        });
+
+    }
+
+    @NotNull
+    @Override
+    public UserInfo syncGetUserInfo() {
+        return new UserInfo("syncGetUserInfo", 18);
+    }
+}
+
+
+```
+
+来邦app需要把服务注册到IpcManager当中，这里支持手动和自动注册：
+
+- 手动注册，通过IpcManager注册，手动注册要提前，建议是在Application当中注册：
+
+```kotlin
+IpcManager.register(InfoService::class) //注册服务
+```
+
+- 自动注册，通过注解处理器来处理，在module中引入ipc-compiler模块：
+
+```groovy
+plugins {
+    ...
+    id 'kotlin-kapt'
+}
+
+或者
+
+applay plugin:'kotlin-kapt'
+
+dependencies {
+	...
+    kapt 'com.github.zhanggaoming.android-ipc:ipc-compiler:2.2'
+}
+
+```
+
+引入ipc-compiler模块后，会自动找BindImpl注解修饰的接口并注册到IpcManager当中
+
+- ##### 来邦合作方app(合作方主要看如何调用，这一段是重点)
+
+来邦合作方app主要就是使用IpcManager这个类来寻找服务：
+
+**1.**初始化并连接服务端进程：
+
+```kotlin
+ IpcManager.init(this)//传入上下文
+ IpcManager.open("com.demo.ipcdemo")//连接服务端，这里是示例，实际应用要传入来邦app的包名，来邦的包名统一为com.lonbon.lonbon_app
+```
+
+**2.**发现服务：
+
+*kotlin*
+
+```kotlin
+IpcManager.getService(InfoService::class)
+IpcManager.getService<InfoService>()
+```
+
+*java*
+
+```java
+IpcManager.INSTANCE.getService(InfoService.class);
+```
+
+以下是客户端demo的示例代码：
+
+```kotlin
+lass CommonActivity : AppCompatActivity() {
+
+    companion object {
+        private const val TAG = "CommonActivity"
+    }
+
+    val instance by lazy { IpcManager.getService<InfoService>() }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_common)
+        IpcManager.config(Config.builder().configDebug(true).build())
+        IpcManager.init(this)
+        IpcManager.open("com.demo.ipcdemo")
+    }
+
+    fun syncGetUserInfo(view: View) {
+
+        Toast.makeText(this, instance.syncGetUserInfo().toString(), Toast.LENGTH_LONG).show()
+
+        Log.i(TAG, "syncGetUserInfo: ->${instance.getEnum(Code.FAILURE)}")
+
+    }
+
+
+    fun asyncGetUserInfo(view: View) {
+
+        instance.asyncGetUserInfo(object : Result<UserInfo>() {
+
+            override fun onData(data: UserInfo) {
+                runOnUiThread {
+
+                    Toast.makeText(this@CommonActivity, data.toString(), Toast.LENGTH_LONG).show()
+                }
+
+            }
+
+        })
+    }
+
+    fun sum(view: View) {
+
+        instance.sum(1, 2, 3, object : Result<Int>() {
+            override fun onData(data: Int) {
+                runOnUiThread {
+                    Toast.makeText(this@CommonActivity, "the sum is $data", Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+        })
+    }
+
+    fun sendBigData(view: View) {
+
+        instance.sendBigData(byteArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+
+    }
+
+
+
+    fun setEventCallBack(view: View) {
+
+        instance.setEventCallBack(object : Result<Event>() {
+            override fun onData(data: Event) {
+                Log.i(TAG, "onData: ${data.id}")
+            }
+        })
+
+    }
+
+
+}
+```
+
+**3.**传输大数据：
+
+- 传输大数据需要设计接口的时候，形参使用***BigData***修饰就可以了。需要注意的是在一个函数里面只能出现一次，而且修饰的类型必须为字节数组，不能是其他类型，考虑到需要传输大数据的场景用字节数组就足够了，接口设计如下*sendBigData*示例：
+
+```
+@BindImpl("com.demo.ipc.InfoServiceManager")
+interface InfoService {
+
+    fun sendBigData(@BigData data: ByteArray)
+
+}
+```
+
+
+
+### 以下是取摄像头数据流的方案，有取摄像头数据流需求的话往下看
 
 根据lb提供的接口，获取相应的服务，这里还要额外说明一下，目前我们有对外提供取帧数据和取流数据服务，可以参考如下方式获取：
 
