@@ -5,21 +5,23 @@ object EventCommand {
     /**
      * 呼叫按钮按下 呼叫按钮弹起
      */
-    val LB_BTN_CALL_DOWN = "btn_call_down"
-    val LB_BTN_CALL_UP = "btn_call_up"
+    const val LB_BTN_CALL_DOWN = "btn_call_down"
+    const val LB_BTN_CALL_UP = "btn_call_up"
 
     /**
      * 喊话按钮按下 呼叫按钮弹起
      */
-    val LB_BTN_TALK_DOWN = "btn_talk_down"
-    val LB_BTN_TALK_UP = "btn_talk_up"
+    const val LB_BTN_TALK_DOWN = "btn_talk_down"
+    const val LB_BTN_TALK_UP = "btn_talk_up"
 
 }
 
 /**
  * NNV-A10设备命令
  */
-object NNV_A10Command {
+object NNVA10Command {
+
+
     /**
      * 手持设备 呼叫按钮按下 呼叫按钮弹起
      */
@@ -67,4 +69,5 @@ object NNV_A10Command {
      */
     const val LB_H_BTN_SURE_DOWN = "h_btn_sure_down"
     const val LB_H_BTN_SURE_UP = "h_btn_sure_up"
+
 }
