@@ -1,5 +1,8 @@
 package com.lb.extend.command
 
+/**
+ * 所有设备上呼叫按钮事件和喊话按钮事件
+ */
 object EventCommand {
 
     /**
@@ -73,7 +76,7 @@ object NNVA10Command {
 }
 
 /**
- * NNV-A10设备命令
+ * NNV-A07设备命令
  */
 object NNVA07Command {
     /**
@@ -87,5 +90,19 @@ object NNVA07Command {
      */
     const val LB_H_BTN_MEDICINE_REMIND_DOWN = "h_btn_medicine_remind_down"
     const val LB_H_BTN_MEDICINE_REMIND_UP = "h_btn_medicine_remind_up"
+
+}
+
+
+/**
+ * NNC主机设备命令
+ */
+object NNCMasterCommand {
+    /**
+     * 手柄的拿起与放下
+     */
+    const val LB_HANDLE_UP = "h_btn_call_up"
+    const val LB_HANDLE_DOWN = "h_btn_call_down"
+
 
 }
