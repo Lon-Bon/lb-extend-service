@@ -204,7 +204,7 @@ dependencies {
 
 来邦合作方app主要就是使用IpcManager这个类来寻找服务：
 
-**1.**初始化并连接服务端进程：
+**1.**初始化并连接服务端进程,这步要提前，建议放到Application当中去：
 
 ```kotlin
  IpcManager.init(this)//传入上下文
