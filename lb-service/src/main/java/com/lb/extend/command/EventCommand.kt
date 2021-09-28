@@ -71,3 +71,21 @@ object NNVA10Command {
     const val LB_H_BTN_SURE_UP = "h_btn_sure_up"
 
 }
+
+/**
+ * NNV-A10设备命令
+ */
+object NNVA07Command {
+    /**
+     * 手持设备 呼叫按钮按下 呼叫按钮弹起
+     */
+    const val LB_H_BTN_CALL_DOWN = "h_btn_call_down"
+    const val LB_H_BTN_CALL_UP = "h_btn_call_up"
+
+    /**
+     * 手持设备 换药提醒 呼叫按钮弹起
+     */
+    const val LB_H_BTN_MEDICINE_REMIND_DOWN = "h_btn_medicine_remind_down"
+    const val LB_H_BTN_MEDICINE_REMIND_UP = "h_btn_medicine_remind_up"
+
+}
