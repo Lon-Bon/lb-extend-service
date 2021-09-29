@@ -8,13 +8,11 @@ import com.zclever.ipc.annotation.BindImpl
 @BindImpl("com.provider.distribute.DistributeProviderManager")
 interface DistributeService {
 
-
     /**
      * 开始双屏异显
      */
     fun start();
 
-    //***********************
 
 
 }
