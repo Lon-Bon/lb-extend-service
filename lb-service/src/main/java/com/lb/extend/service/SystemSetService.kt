@@ -12,6 +12,16 @@ import com.zclever.ipc.core.Result
 @BindImpl("com.lonbon.lonbonprovider.manager.EventProviderManager")
 interface SystemSetService {
 
+    /**
+     * 监听各种按钮事件
+     */
     fun setEventCallBack(callBack :Result<LonbonEvent>)
+
+    /**
+     * 门灯控制
+     * 门灯对应的颜色必须一开一关。连着开不同颜色就会有不同颜色闪烁
+     * 关闭必须把所有颜色关闭才能不亮
+     */
+    fun extDoorLampCtrl(color: Int, bOn: Boolean)
 
 }

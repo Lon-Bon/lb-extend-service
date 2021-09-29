@@ -101,8 +101,19 @@ object NNCMasterCommand {
     /**
      * 手柄的拿起与放下
      */
-    const val LB_HANDLE_UP = "h_btn_call_up"
-    const val LB_HANDLE_DOWN = "h_btn_call_down"
+    const val LB_HANDLE_UP = "nnc_handle_up"
+    const val LB_HANDLE_DOWN = "nnc_handle_down"
 
 
+}
+
+/**
+ * ANW4报警器 事件
+ */
+object ANW4Command{
+    /**
+     *  ANW4报警器短按
+     */
+    const val LB_ANW4_PRESS = "anw4_press"
+    const val LB_ANW4_LONG_PRESS = "anw4_long_press"
 }
