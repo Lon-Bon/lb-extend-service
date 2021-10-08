@@ -73,10 +73,16 @@ object NNVA10Command {
     const val LB_H_BTN_SURE_DOWN = "h_btn_sure_down"
     const val LB_H_BTN_SURE_UP = "h_btn_sure_up"
 
+
     /**
-     * 手持设备 扫码功能
+     * NFC刷卡事件
      */
-    const val LB_H_SCAN = "h_btn_sure_down"
+    const val LB_NFC_CARD_INFO = "h_nfc_card_info"
+
+    /**
+     * 扫描头事件
+     */
+    const val LB_H_SCAN_CODE = "h_scan_code"
 
 }
 
@@ -95,16 +101,6 @@ object NNVA07Command {
      */
     const val LB_H_BTN_MEDICINE_REMIND_DOWN = "h_btn_medicine_remind_down"
     const val LB_H_BTN_MEDICINE_REMIND_UP = "h_btn_medicine_remind_up"
-
-    /**
-     * NFC刷卡事件
-     */
-    const val LB_NFC_CARD_INFO = "h_nfc_card_info"
-
-    /**
-     * 扫描头事件
-     */
-    const val LB_H_SCAN_CODE = "h_scan_code"
 }
 
 
