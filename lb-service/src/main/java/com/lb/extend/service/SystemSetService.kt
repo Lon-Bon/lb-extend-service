@@ -30,4 +30,10 @@ interface SystemSetService {
      */
     fun extDoorLampCtrl(color: Int, bOn: Boolean)
 
+    /**
+     * NFC刷卡器开关
+     * @param bOn 开关：true 为打开， false为关闭
+     */
+    fun nfcControl(bOn:Boolean)
+
 }
