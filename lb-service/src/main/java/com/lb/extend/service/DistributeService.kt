@@ -15,5 +15,4 @@ interface DistributeService {
     // 启动双屏异显（初始化后才能启动）
     fun start();
 
-
 }
