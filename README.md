@@ -229,7 +229,7 @@ IpcManager.INSTANCE.getService(InfoService.class);
 以下是客户端demo的示例代码：
 
 ```kotlin
-lass CommonActivity : AppCompatActivity() {
+class CommonActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "CommonActivity"
