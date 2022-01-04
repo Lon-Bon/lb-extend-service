@@ -36,4 +36,10 @@ interface SystemSetService {
      */
     fun nfcControl(bOn:Boolean)
 
+    /**
+     * 摄像头开关
+     * @param open 开关：true 为打开， false为关闭
+     */
+    fun cameraControl(open:Boolean)
+
 }
