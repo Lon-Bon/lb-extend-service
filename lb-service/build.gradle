@@ -3,7 +3,11 @@ plugins {
     id 'kotlin-android'
     id 'com.github.dcendents.android-maven'
 }
-group = 'com.github.Lon-Bon'
+group = PUBLISH_GROUP
+
+version = PUBLISH_VERSION
+
+apply from: '../gradle/publish_aar.gradle'
 
 android {
     compileSdkVersion 30
@@ -13,7 +17,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.7.0-SNAPSHOT"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -38,3 +42,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     api 'com.github.zhanggaoming.android-ipc:ipc-core:2.7'
 }
+
+
