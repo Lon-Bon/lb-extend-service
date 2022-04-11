@@ -3,6 +3,9 @@ plugins {
     id 'kotlin-android'
     id 'com.github.dcendents.android-maven'
 }
+
+properties.put("MAVEN_REPO_TYPE","REMOT")
+
 group = PUBLISH_GROUP
 
 version = PUBLISH_VERSION
@@ -40,7 +43,7 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api 'com.github.zhanggaoming.android-ipc:ipc-core:2.7'
+    api 'com.github.zhanggaoming.android-ipc:ipc-core:3.0.0'
 }
 
 
