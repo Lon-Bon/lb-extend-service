@@ -35,10 +35,14 @@ interface IntercomService {
      *
      * 主机用：用于查询设备在线列表进行UI显示
      *
+     * @param areaId 区号
+     * @param masterNum 主机号
+     * @param slaveNum 分机号
+     * @param devRegType 注册类型
      * @param callBack 返回该areaId下的在线设备列表
      *
      */
-    fun asyncGetDeviceListInfo(areaId: Int, callBack: Result<ArrayList<DeviceInfo>>)
+    fun asyncGetDeviceListInfo(areaId: Int, masterNum: Int, slaveNum: Int, devRegType: Int, callBack: Result<ArrayList<DeviceInfo>>)
 
     /**
      * 设备对讲状态回调接口
@@ -63,25 +67,31 @@ interface IntercomService {
      * 对讲呼叫方法
      * 已有对讲状态时调用呼叫
      *
-     * @param deviceInfo 需要对讲的设备（即选中的设备）
+     * @param displayNum 设备编号
+     * @param areaID 区号
+     * @param devRegType 注册类型
      */
-    fun call(deviceInfo: DeviceInfo)
+    fun call(displayNum : Int, areaID : Int, devRegType : Int)
 
     /**
      * 对讲接听方法
      * 已有对讲状态时调用接听
      *
-     * @param deviceInfo 需要对讲的设备（即选中的设备）
+     * @param displayNum 设备编号
+     * @param areaID 区号
+     * @param devRegType 注册类型
      */
-    fun answer(deviceInfo: DeviceInfo)
+    fun answer(displayNum : Int, areaID : Int, devRegType : Int)
 
     /**
      * 对讲挂断方法
      * 已有对讲状态时调用挂断
      *
-     * @param deviceInfo 需要对讲的设备（即选中的设备）
+     * @param displayNum 设备编号
+     * @param areaID 区号
+     * @param devRegType 注册类型
      */
-    fun hangup(deviceInfo: DeviceInfo)
+    fun hangup(displayNum : Int, areaID : Int, devRegType : Int)
 
 }
 
