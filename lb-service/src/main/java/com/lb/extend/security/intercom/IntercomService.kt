@@ -59,39 +59,45 @@ interface IntercomService {
      * 对讲点击方法，主机使用
      * 主机点击列表中某个设备调用，交由悬浮窗判断是呼叫还是接听
      *
-     * @param deviceInfo 需要对讲的设备（即选中的设备）
+     * @param masterNum 主机号
+     * @param slaveNum 分机号
+     * @param areaID 区号
+     * @param devRegType 注册类型
      */
-    fun masterClickItem(deviceInfo: DeviceInfo)
+    fun masterClickItem(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
 
     /**
      * 对讲呼叫方法
      * 已有对讲状态时调用呼叫
      *
-     * @param displayNum 设备编号
+     * @param masterNum 主机号
+     * @param slaveNum 分机号
      * @param areaID 区号
      * @param devRegType 注册类型
      */
-    fun call(displayNum : Int, areaID : Int, devRegType : Int)
+    fun call(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
 
     /**
      * 对讲接听方法
      * 已有对讲状态时调用接听
      *
-     * @param displayNum 设备编号
+     * @param masterNum 主机号
+     * @param slaveNum 分机号
      * @param areaID 区号
      * @param devRegType 注册类型
      */
-    fun answer(displayNum : Int, areaID : Int, devRegType : Int)
+    fun answer(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
 
     /**
      * 对讲挂断方法
      * 已有对讲状态时调用挂断
      *
-     * @param displayNum 设备编号
+     * @param masterNum 主机号
+     * @param slaveNum 分机号
      * @param areaID 区号
      * @param devRegType 注册类型
      */
-    fun hangup(displayNum : Int, areaID : Int, devRegType : Int)
+    fun hangup(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
 
 }
 
@@ -119,14 +125,20 @@ data class DoorContact(
  * talkState：设备对讲状态（参考BaseDevice里的状态）
  * doorState：门磁状态
  */
-data class DeviceInfo(
-    val ip: String,
-    val description: String,
-    val areaID: Int,
-    val masterNum: Int,
-    val slaveNum: Int,
-    val childNum: Int,
-    val devRegType: Int,
-    val talkState: Int,
-    val doorState: SparseArray<Int>
-)
+class DeviceInfo {
+    var ip: String = ""
+    var description: String = ""
+    var areaID: Int = 0
+    var masterNum: Int = 0
+    var slaveNum: Int = 0
+    var childNum: Int = 0
+    var devRegType: Int = 0
+    var talkState: Int = 0
+    var doorState: SparseArray<Int> = SparseArray()
+
+    constructor()
+
+    constructor(areaID: Int, masterNum: Int, slaveNum: Int, childNum: Int, devRegType: Int)
+
+    constructor(ip: String, description: String, areaID: Int, masterNum: Int, slaveNum: Int, childNum: Int, devRegType: Int, talkState: Int, doorState: SparseArray<Int>)
+}
