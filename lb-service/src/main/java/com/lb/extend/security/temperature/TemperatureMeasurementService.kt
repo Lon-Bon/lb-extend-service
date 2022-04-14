@@ -9,15 +9,13 @@ interface TemperatureMeasurementService {
 
     /**
      * 启动测温模块（同步方法），进入界面时可调用
-     * @return Int Int 0：成功，其它值失败
      */
-    fun syncStart(): Int
+    fun start()
 
     /**
      * 停止测温模块（同步方法），离开界面时可调用
-     * @return Int 0：成功，其它值失败
      */
-    fun syncStop(): Int
+    fun stop()
 
     /**
      * 测温回调
