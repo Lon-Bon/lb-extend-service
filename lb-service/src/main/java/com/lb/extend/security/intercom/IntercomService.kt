@@ -2,6 +2,7 @@ package com.lb.extend.security.intercom
 
 import android.util.SparseArray
 import com.zclever.ipc.annotation.BindImpl
+import com.zclever.ipc.core.Result
 
 @BindImpl("com.lonbon.intercom_provider.IntercomServiceImpl")
 interface IntercomService {
@@ -98,6 +99,14 @@ interface IntercomService {
      * @param devRegType 注册类型
      */
     fun hangup(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
+
+    /**
+     * 开关电控锁
+     *
+     * @param num 电控锁序号
+     * @param open 开关 0关 1开
+     */
+    fun openLockCtrl(num: Int, open: Int)
 
 }
 
