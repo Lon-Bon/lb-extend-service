@@ -145,9 +145,37 @@ class DeviceInfo {
     var talkState: Int = 0
     var doorState: SparseArray<Int> = SparseArray()
 
-    constructor()
+    constructor(areaID: Int, masterNum: Int, slaveNum: Int, childNum: Int, devRegType: Int) {
+        this.areaID = areaID
+        this.masterNum = masterNum
+        this.slaveNum = slaveNum
+        this.childNum = childNum
+        this.devRegType = devRegType
+    }
 
-    constructor(areaID: Int, masterNum: Int, slaveNum: Int, childNum: Int, devRegType: Int)
+    constructor(
+        description: String,
+        areaID: Int,
+        masterNum: Int,
+        slaveNum: Int,
+        childNum: Int,
+        devRegType: Int,
+        talkState: Int,
+        doorState: SparseArray<Int>
+    ) {
+        this.description = description
+        this.areaID = areaID
+        this.masterNum = masterNum
+        this.slaveNum = slaveNum
+        this.childNum = childNum
+        this.devRegType = devRegType
+        this.talkState = talkState
+        this.doorState = doorState
+    }
 
-    constructor(ip: String, description: String, areaID: Int, masterNum: Int, slaveNum: Int, childNum: Int, devRegType: Int, talkState: Int, doorState: SparseArray<Int>)
+    override fun toString(): String {
+        return "DeviceInfo(ip='$ip', description='$description', areaID=$areaID, masterNum=$masterNum, slaveNum=$slaveNum, childNum=$childNum, devRegType=$devRegType, talkState=$talkState, doorState=$doorState)"
+    }
+
+
 }
