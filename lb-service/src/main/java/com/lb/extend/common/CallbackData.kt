@@ -15,6 +15,9 @@ object Code {
     //成功
     const val SUCCESS = 0
 
+    //失败
+    const val FAIL = -1
+
 }
 
 object Msg {
