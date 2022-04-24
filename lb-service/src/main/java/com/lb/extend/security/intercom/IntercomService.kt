@@ -46,7 +46,13 @@ interface IntercomService {
      * @param callBack 返回该areaId下的在线设备列表
      *
      */
-    fun asyncGetDeviceListInfo(areaId: Int, masterNum: Int, slaveNum: Int, devRegType: Int, callBack: Result<ArrayList<DeviceInfo>>)
+    fun asyncGetDeviceListInfo(
+        areaId: Int,
+        masterNum: Int,
+        slaveNum: Int,
+        devRegType: Int,
+        callBack: Result<ArrayList<DeviceInfo>>
+    )
 
     /**
      * 设备对讲状态回调接口
@@ -68,7 +74,7 @@ interface IntercomService {
      * @param areaID 区号
      * @param devRegType 注册类型
      */
-    fun masterClickItem(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
+    fun masterClickItem(masterNum: Int, slaveNum: Int, areaID: Int, devRegType: Int)
 
     /**
      * 对讲呼叫方法
@@ -79,7 +85,7 @@ interface IntercomService {
      * @param areaID 区号
      * @param devRegType 注册类型
      */
-    fun call(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
+    fun call(masterNum: Int, slaveNum: Int, areaID: Int, devRegType: Int)
 
     /**
      * 对讲接听方法
@@ -90,7 +96,7 @@ interface IntercomService {
      * @param areaID 区号
      * @param devRegType 注册类型
      */
-    fun answer(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
+    fun answer(masterNum: Int, slaveNum: Int, areaID: Int, devRegType: Int)
 
     /**
      * 对讲挂断方法
@@ -101,7 +107,7 @@ interface IntercomService {
      * @param areaID 区号
      * @param devRegType 注册类型
      */
-    fun hangup(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
+    fun hangup(masterNum: Int, slaveNum: Int, areaID: Int, devRegType: Int)
 
     /**
      * 开关电控锁
@@ -110,6 +116,13 @@ interface IntercomService {
      * @param open 开关 0关 1开
      */
     fun openLockCtrl(num: Int, open: Int)
+
+    /**
+     * 获取当前设备信息（包含设备编号）
+     *
+     * @param callBack 设备信息
+     */
+    fun getCurrentDeviceInfo(callBack: Result<LocalDeviceInfo>)
 
 }
 
@@ -179,6 +192,32 @@ class DeviceInfo {
     override fun toString(): String {
         return "DeviceInfo(ip='$ip', description='$description', areaID=$areaID, masterNum=$masterNum, slaveNum=$slaveNum, childNum=$childNum, devRegType=$devRegType, talkState=$talkState, doorState=$doorState)"
     }
+}
 
+class LocalDeviceInfo {
+    var deviceName = ""
+    var deviceModel = ""
+    var customizedModel = ""
+    var hardwareVersion = ""
+    var NKVersion = ""
+    var modelCode = 0
+    var platform: String? = null
+    var account = ""
+    var password = ""
+    var encPassword = ""
+    var sipPort = 0
+    var sn = ""
+    var mac = ""
+    var ip = ""
+    var gateway = ""
+    var netmask = ""
+    var isAllowSDRecording = false
+    var manufactoryType = 0
+    var paymentTermCode = ""
+    var produceTime = ""
+    var displayNum = 0
 
+    override fun toString(): String {
+        return "LocalDeviceInfo(deviceName='$deviceName', deviceModel='$deviceModel', customizedModel='$customizedModel', hardwareVersion='$hardwareVersion', NKVersion='$NKVersion', modelCode=$modelCode, platform=$platform, account='$account', password='$password', encPassword='$encPassword', sipPort=$sipPort, sn='$sn', mac='$mac', ip='$ip', gateway='$gateway', netmask='$netmask', isAllowSDRecording=$isAllowSDRecording, manufactoryType=$manufactoryType, paymentTermCode='$paymentTermCode', produceTime='$produceTime', displayNum=$displayNum)"
+    }
 }
