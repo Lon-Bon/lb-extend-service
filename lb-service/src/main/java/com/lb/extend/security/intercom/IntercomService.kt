@@ -32,9 +32,12 @@ interface IntercomService {
     fun onDoorContactValue(callBack: Result<DoorContact>)
 
     /**
-     * 设备终端管理接口
+     * 查询设备列表接口（带描述信息）
      *
      * 主机用：用于查询设备在线列表进行UI显示
+     *
+     * 仅传区号，其他参数传0，则为查询区号下的主机列表
+     * 传区号、主机号、注册类型，分机号传0，则为查询该区该主机下某类型的分机列表
      *
      * @param areaId 区号
      * @param masterNum 主机号
