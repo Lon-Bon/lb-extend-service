@@ -124,6 +124,13 @@ interface IntercomService {
      */
     fun getCurrentDeviceInfo(callBack: Result<LocalDeviceInfo>)
 
+    /**
+     * 设备对讲事件回调接口
+     *
+     * 回调当前设备对讲事件
+     * @param callBack 返回状态变化的设备
+     */
+    fun talkEventCallback(callBack: Result<TalkEvent>)
 }
 
 /**
@@ -133,6 +140,7 @@ interface IntercomService {
  * open：门磁开关, 1 打开 0关闭
  */
 data class DoorContact(
+    val deviceInfo: DeviceInfo,
     val num: Int,
     val open: Int
 )
@@ -221,6 +229,21 @@ class LocalDeviceInfo {
 
     override fun toString(): String {
         return "LocalDeviceInfo(deviceName='$deviceName', deviceModel='$deviceModel', customizedModel='$customizedModel', hardwareVersion='$hardwareVersion', NKVersion='$NKVersion', modelCode=$modelCode, platform=$platform, account='$account', password='$password', encPassword='$encPassword', sipPort=$sipPort, sn='$sn', mac='$mac', ip='$ip', gateway='$gateway', netmask='$netmask', isAllowSDRecording=$isAllowSDRecording, manufactoryType=$manufactoryType, paymentTermCode='$paymentTermCode', produceTime='$produceTime', displayNum=$displayNum, masterNum=$masterNum, slaveNum=$slaveNum)"
+    }
+
+}
+
+class TalkEvent {
+    var deviceInfo: DeviceInfo? = null
+    var eventID: Int = 0
+
+    constructor(deviceInfo: DeviceInfo?, eventID: Int) {
+        this.deviceInfo = deviceInfo
+        this.eventID = eventID
+    }
+
+    override fun toString(): String {
+        return "TalkEvent(deviceInfo=$deviceInfo, eventID=$eventID)"
     }
 
 }
