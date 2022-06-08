@@ -70,6 +70,12 @@ interface ISipServerService {
      */
     fun sipHangup(sipNum:String,dataType:Int):String
 
+    /**
+     * 获取 信息交互服务器 token
+     * @return String token
+     */
+    fun getToken():String
+
 }
 
 class SipEvent{
