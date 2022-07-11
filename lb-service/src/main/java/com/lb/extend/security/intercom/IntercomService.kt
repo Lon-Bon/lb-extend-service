@@ -131,6 +131,20 @@ interface IntercomService {
      * @param callBack 返回状态变化的设备
      */
     fun talkEventCallback(callBack: Result<TalkEvent>)
+
+    /**
+     * 设备在线回调接口
+     *
+     * @param callBack 返回状态变为在线的设备
+     */
+    fun onDeviceOnLine(callBack: Result<DeviceInfo>)
+
+    /**
+     * 设备离线回调接口
+     *
+     * @param callBack 返回态变为离线的设备
+     */
+    fun onDeviceOffLine(callBack: Result<DeviceInfo>)
 }
 
 /**
