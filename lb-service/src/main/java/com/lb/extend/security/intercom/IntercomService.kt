@@ -145,6 +145,13 @@ interface IntercomService {
      * @param callBack 返回态变为离线的设备
      */
     fun onDeviceOffLine(callBack: Result<DeviceInfo>)
+
+    /**
+     * 监听转对讲
+     *
+     * @param callBack 返回态变为离线的设备
+     */
+    fun listenToTalk()
 }
 
 /**
