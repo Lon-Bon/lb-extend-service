@@ -25,7 +25,7 @@ def mavenRepoLocalUrl = MAVEN_LOCAL_PATH.startsWith("/") ? MAVEN_LOCAL_PATH :  "
 
 def MAVEN_REPO_TYPE = properties.getOrDefault("MAVEN_REPO_TYPE", "LOCAL")
 def MAVEN_REMOTE_URL_RELEASE = properties.getOrDefault("MAVEN_REMOTE_URL_RELEASE", "http://192.168.4.205:8081/repository/maven-releases/")
-def MAVEN_REMOTE_URL_SNAPSHOT = properties.getOrDefault("MAVEN_REMOTE_URL_SNAPSHOT", "http://192.168.4.205:8081/repository/maven-snapshots/")
+def MAVEN_REMOTE_URL_SNAPSHOT = properties.getOrDefault("MAVEN_REMOTE_URL_SNAPSHOT", "http://voip.lonbon.com:8081/repository/maven-snapshots/")
 def MAVEN_REMOTE_NAME = localProperties.getOrDefault("MAVEN_REMOTE_NAME", "admin")
 def MAVEN_REMOTE_PASSWORD = localProperties.getOrDefault("MAVEN_REMOTE_PASSWORD", "admin123")
 

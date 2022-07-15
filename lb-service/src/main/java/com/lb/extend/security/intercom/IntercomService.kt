@@ -152,6 +152,18 @@ interface IntercomService {
      * @param callBack 返回态变为离线的设备
      */
     fun listenToTalk()
+
+    /**
+     * 设置视频隐藏
+     *
+     * @param hide 隐藏视频 true隐藏 false显示
+     */
+    fun hideTalkView(hide: Boolean)
+
+    /**
+     * 一键呼叫
+     */
+    fun oneKeyCall()
 }
 
 /**
