@@ -164,6 +164,13 @@ interface IntercomService {
      * 一键呼叫
      */
     fun oneKeyCall()
+
+    /**
+     * 开关本地摄像头
+     *
+     * @param open 开关本地摄像头 true打开 false关闭
+     */
+    fun openLocalCamera(open: Boolean)
 }
 
 /**
