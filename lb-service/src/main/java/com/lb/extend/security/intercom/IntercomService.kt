@@ -32,9 +32,12 @@ interface IntercomService {
     fun onDoorContactValue(callBack: Result<DoorContact>)
 
     /**
-     * 设备终端管理接口
+     * 查询设备列表接口（带描述信息）
      *
      * 主机用：用于查询设备在线列表进行UI显示
+     *
+     * 仅传区号，其他参数传0，则为查询区号下的主机列表
+     * 传区号、主机号、注册类型，分机号传0，则为查询该区该主机下某类型的分机列表
      *
      * @param areaId 区号
      * @param masterNum 主机号
@@ -43,7 +46,13 @@ interface IntercomService {
      * @param callBack 返回该areaId下的在线设备列表
      *
      */
-    fun asyncGetDeviceListInfo(areaId: Int, masterNum: Int, slaveNum: Int, devRegType: Int, callBack: Result<ArrayList<DeviceInfo>>)
+    fun asyncGetDeviceListInfo(
+        areaId: Int,
+        masterNum: Int,
+        slaveNum: Int,
+        devRegType: Int,
+        callBack: Result<ArrayList<DeviceInfo>>
+    )
 
     /**
      * 设备对讲状态回调接口
@@ -65,7 +74,7 @@ interface IntercomService {
      * @param areaID 区号
      * @param devRegType 注册类型
      */
-    fun masterClickItem(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
+    fun masterClickItem(masterNum: Int, slaveNum: Int, areaID: Int, devRegType: Int)
 
     /**
      * 对讲呼叫方法
@@ -76,7 +85,7 @@ interface IntercomService {
      * @param areaID 区号
      * @param devRegType 注册类型
      */
-    fun call(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
+    fun call(masterNum: Int, slaveNum: Int, areaID: Int, devRegType: Int)
 
     /**
      * 对讲接听方法
@@ -87,7 +96,7 @@ interface IntercomService {
      * @param areaID 区号
      * @param devRegType 注册类型
      */
-    fun answer(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
+    fun answer(masterNum: Int, slaveNum: Int, areaID: Int, devRegType: Int)
 
     /**
      * 对讲挂断方法
@@ -98,7 +107,7 @@ interface IntercomService {
      * @param areaID 区号
      * @param devRegType 注册类型
      */
-    fun hangup(masterNum: Int, slaveNum: Int, areaID : Int, devRegType : Int)
+    fun hangup(masterNum: Int, slaveNum: Int, areaID: Int, devRegType: Int)
 
     /**
      * 开关电控锁
@@ -108,6 +117,60 @@ interface IntercomService {
      */
     fun openLockCtrl(num: Int, open: Int)
 
+    /**
+     * 获取当前设备信息（包含设备编号）
+     *
+     * @param callBack 设备信息
+     */
+    fun getCurrentDeviceInfo(callBack: Result<LocalDeviceInfo>)
+
+    /**
+     * 设备对讲事件回调接口
+     *
+     * 回调当前设备对讲事件
+     * @param callBack 返回状态变化的设备
+     */
+    fun talkEventCallback(callBack: Result<TalkEvent>)
+
+    /**
+     * 设备在线回调接口
+     *
+     * @param callBack 返回状态变为在线的设备
+     */
+    fun onDeviceOnLine(callBack: Result<DeviceInfo>)
+
+    /**
+     * 设备离线回调接口
+     *
+     * @param callBack 返回态变为离线的设备
+     */
+    fun onDeviceOffLine(callBack: Result<DeviceInfo>)
+
+    /**
+     * 监听转对讲
+     *
+     * @param callBack 返回态变为离线的设备
+     */
+    fun listenToTalk()
+
+    /**
+     * 设置视频隐藏
+     *
+     * @param hide 隐藏视频 true隐藏 false显示
+     */
+    fun hideTalkView(hide: Boolean)
+
+    /**
+     * 一键呼叫
+     */
+    fun oneKeyCall()
+
+    /**
+     * 开关本地摄像头
+     *
+     * @param open 开关本地摄像头 true打开 false关闭
+     */
+    fun openLocalCamera(open: Boolean)
 }
 
 /**
@@ -117,6 +180,7 @@ interface IntercomService {
  * open：门磁开关, 1 打开 0关闭
  */
 data class DoorContact(
+    val deviceInfo: DeviceInfo,
     val num: Int,
     val open: Int
 )
@@ -145,9 +209,81 @@ class DeviceInfo {
     var talkState: Int = 0
     var doorState: SparseArray<Int> = SparseArray()
 
-    constructor()
+    constructor(areaID: Int, masterNum: Int, slaveNum: Int, childNum: Int, devRegType: Int) {
+        this.areaID = areaID
+        this.masterNum = masterNum
+        this.slaveNum = slaveNum
+        this.childNum = childNum
+        this.devRegType = devRegType
+    }
 
-    constructor(areaID: Int, masterNum: Int, slaveNum: Int, childNum: Int, devRegType: Int)
+    constructor(
+        description: String,
+        areaID: Int,
+        masterNum: Int,
+        slaveNum: Int,
+        childNum: Int,
+        devRegType: Int,
+        talkState: Int,
+        doorState: SparseArray<Int>
+    ) {
+        this.description = description
+        this.areaID = areaID
+        this.masterNum = masterNum
+        this.slaveNum = slaveNum
+        this.childNum = childNum
+        this.devRegType = devRegType
+        this.talkState = talkState
+        this.doorState = doorState
+    }
 
-    constructor(ip: String, description: String, areaID: Int, masterNum: Int, slaveNum: Int, childNum: Int, devRegType: Int, talkState: Int, doorState: SparseArray<Int>)
+    override fun toString(): String {
+        return "DeviceInfo(ip='$ip', description='$description', areaID=$areaID, masterNum=$masterNum, slaveNum=$slaveNum, childNum=$childNum, devRegType=$devRegType, talkState=$talkState, doorState=$doorState)"
+    }
+}
+
+class LocalDeviceInfo {
+    var deviceName = ""
+    var deviceModel = ""
+    var customizedModel = ""
+    var hardwareVersion = ""
+    var NKVersion = ""
+    var modelCode = 0
+    var platform: String? = null
+    var account = ""
+    var password = ""
+    var encPassword = ""
+    var sipPort = 0
+    var sn = ""
+    var mac = ""
+    var ip = ""
+    var gateway = ""
+    var netmask = ""
+    var isAllowSDRecording = false
+    var manufactoryType = 0
+    var paymentTermCode = ""
+    var produceTime = ""
+    var displayNum = 0
+    var masterNum = 0
+    var slaveNum = 0
+
+    override fun toString(): String {
+        return "LocalDeviceInfo(deviceName='$deviceName', deviceModel='$deviceModel', customizedModel='$customizedModel', hardwareVersion='$hardwareVersion', NKVersion='$NKVersion', modelCode=$modelCode, platform=$platform, account='$account', password='$password', encPassword='$encPassword', sipPort=$sipPort, sn='$sn', mac='$mac', ip='$ip', gateway='$gateway', netmask='$netmask', isAllowSDRecording=$isAllowSDRecording, manufactoryType=$manufactoryType, paymentTermCode='$paymentTermCode', produceTime='$produceTime', displayNum=$displayNum, masterNum=$masterNum, slaveNum=$slaveNum)"
+    }
+
+}
+
+class TalkEvent {
+    var deviceInfo: DeviceInfo? = null
+    var eventID: Int = 0
+
+    constructor(deviceInfo: DeviceInfo?, eventID: Int) {
+        this.deviceInfo = deviceInfo
+        this.eventID = eventID
+    }
+
+    override fun toString(): String {
+        return "TalkEvent(deviceInfo=$deviceInfo, eventID=$eventID)"
+    }
+
 }
