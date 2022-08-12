@@ -171,6 +171,32 @@ interface IntercomService {
      * @param open 开关本地摄像头 true打开 false关闭
      */
     fun openLocalCamera(open: Boolean)
+
+    /**
+     * 切断分机通话
+     *
+     * @param masterNum 主机号
+     * @param slaveNum 分机号
+     * @param areaID 区号
+     * @param devRegType 注册类型
+     */
+    fun cutCallExt(masterNum: Int, slaveNum: Int, areaID: Int, devRegType: Int)
+
+    /**
+     * 设置IPC页面显示位置（单位px）
+     * @param left 对讲页面离屏幕左间距
+     * @param top 对讲页面离屏幕上间距
+     * @param width 对讲页面宽
+     * @param height 对讲页面高
+     */
+    fun setIpcViewPosition(left: Int, top: Int, width: Int, height: Int)
+
+    /**
+     * 设置视频隐藏
+     *
+     * @param hide 隐藏视频 true隐藏 false显示
+     */
+    fun hideIpcView(hide: Boolean)
 }
 
 /**
