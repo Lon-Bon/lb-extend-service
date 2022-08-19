@@ -197,6 +197,36 @@ interface IntercomService {
      * @param hide 隐藏视频 true隐藏 false显示
      */
     fun hideIpcView(hide: Boolean)
+
+    /**
+     * 设置呼叫对象
+     *
+     * @param masterNum 主机号
+     * @param areaID 区号
+     */
+    fun setCallDevice(masterNum: Int, areaID: Int)
+
+    /**
+     * 设置报警对象
+     *
+     * @param masterNum 主机号
+     * @param areaID 区号
+     */
+    fun setAlarmDevice(masterNum: Int, areaID: Int)
+
+    /**
+     * 一键呼叫
+     *
+     */
+    fun extCall()
+
+    /**
+     * 一键报警
+     *
+     */
+    fun extAlarm()
+
+    fun setTalkViewFullScreen(needFullScreen: Boolean)
 }
 
 /**
