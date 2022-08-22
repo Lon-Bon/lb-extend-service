@@ -258,6 +258,11 @@ interface IntercomService {
     fun initFrame()
 
     /**
+     * 开启启动发送数据
+     */
+    fun startTakeFrame()
+
+    /**
      * 设置采集图像宽高
      * @param width Int
      * @param height Int
