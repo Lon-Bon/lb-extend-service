@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'com.github.dcendents.android-maven'
+    id 'kotlin-kapt'
 }
 
 properties.put("MAVEN_REPO_TYPE","REMOT")
@@ -43,7 +44,8 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api 'com.github.zhanggaoming.android-ipc:ipc-core:3.0.0'
+    api 'com.github.zhanggaoming.android-ipc:ipc-core:2a471f7272'
+    kapt 'com.github.zhanggaoming.android-ipc:ipc-compiler:2.2'
 }
 
 
