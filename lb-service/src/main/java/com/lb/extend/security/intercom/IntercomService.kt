@@ -250,6 +250,19 @@ interface IntercomService {
      * @param enable
      */
     fun setMicEna(enable: Boolean)
+
+
+    /**
+     * 本机摄像头拍照
+     */
+    fun initFrame()
+
+    /**
+     * 设置采集图像宽高
+     * @param width Int
+     * @param height Int
+     */
+    fun setViewWidthHeight(width:Int,height:Int)
 }
 
 /**
