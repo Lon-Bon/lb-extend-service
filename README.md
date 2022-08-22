@@ -422,7 +422,7 @@ class VideoActivity : AppCompatActivity() {
 
 服务端需要继承VideoService，并将实例放置到IpcManager当中去
 
-```ktolin
+```kotlin
 /**
  * 这个类是模拟发送数据
  */
