@@ -42,11 +42,5 @@ interface SystemSetService {
      */
     fun cameraControl(open:Boolean)
 
-    /**
-     * 是否开启第三方守护广播：com.lonbon.intent.action.app_start
-     * 第三方设备监听该广播可以调起应用
-     * @param open 开关：true 开启， false 关闭
-     */
-    fun openGuard(open:Boolean)
 
 }
