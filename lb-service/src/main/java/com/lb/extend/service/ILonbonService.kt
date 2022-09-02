@@ -3,7 +3,7 @@ package com.lb.extend.service
 import com.zclever.ipc.annotation.BindImpl
 
 /**
- * 提供一些系统配置祥光服务器
+ * 提供一些系统配置相关服务
  * @BindImpl("com.lonbon.lonbon_app.xxx"),这里要使用BindImpl注解
  */
 @BindImpl("com.lonbon.lonbon_app.LonbonServiceImpl")
