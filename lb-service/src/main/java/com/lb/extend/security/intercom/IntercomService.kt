@@ -268,6 +268,13 @@ interface IntercomService {
      * @param height Int
      */
     fun setViewWidthHeight(width:Int,height:Int)
+
+    /**
+     * 对讲终端人员信息回调接口
+     *
+     * @param callBack 返回人员信息
+     */
+    fun onTalkPeopleInfoCallback(callBack: Result<GeneralUDPBean>)
 }
 
 /**
@@ -381,6 +388,24 @@ class TalkEvent {
 
     override fun toString(): String {
         return "TalkEvent(deviceInfo=$deviceInfo, eventID=$eventID)"
+    }
+
+}
+class GeneralUDPBean {
+    var action: String? = null
+    var interCmd: String? = null
+    var slaveCode: String? = null
+    var name: String? = null
+    var code: String? = null
+    var event: String? = null
+    var displayNum: String? = null
+    var areaID: String? = null
+    var BranchCode: String? = null
+    var PersonType :String? = null
+    var RoomNum: String? = null
+
+    override fun toString(): String {
+        return "GeneralUDPBean(action=$action, interCmd=$interCmd, slaveCode=$slaveCode, name=$name, code=$code, event=$event, displayNum=$displayNum, areaID=$areaID, BranchCode=$BranchCode, PersonType=$PersonType, RoomNum=$RoomNum)"
     }
 
 }
