@@ -20,7 +20,7 @@ interface EducationService {
      * spaceFree：剩余可用空间
      * description：描述信息
      */
-    fun init(
+    fun initEducation(
         sn: String,
         ip: String,
         mac: String,
