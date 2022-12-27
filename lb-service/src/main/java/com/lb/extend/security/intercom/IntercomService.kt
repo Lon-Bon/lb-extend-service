@@ -171,6 +171,110 @@ interface IntercomService {
      * @param open 开关本地摄像头 true打开 false关闭
      */
     fun openLocalCamera(open: Boolean)
+
+    /**
+     * 切断分机通话
+     *
+     * @param masterNum 主机号
+     * @param slaveNum 分机号
+     * @param areaID 区号
+     * @param devRegType 注册类型
+     */
+    fun cutCallExt(masterNum: Int, slaveNum: Int, areaID: Int, devRegType: Int)
+
+    /**
+     * 设置IPC页面显示位置（单位px）
+     * @param left 对讲页面离屏幕左间距
+     * @param top 对讲页面离屏幕上间距
+     * @param width 对讲页面宽
+     * @param height 对讲页面高
+     */
+    fun setIpcViewPosition(left: Int, top: Int, width: Int, height: Int)
+
+    /**
+     * 设置视频隐藏
+     *
+     * @param hide 隐藏视频 true隐藏 false显示
+     */
+    fun hideIpcView(hide: Boolean)
+
+    /**
+     * 设置呼叫对象
+     *
+     * @param masterNum 主机号
+     * @param areaID 区号
+     */
+    fun setCallDevice(masterNum: Int, areaID: Int)
+
+    /**
+     * 设置报警对象
+     *
+     * @param masterNum 主机号
+     * @param areaID 区号
+     */
+    fun setAlarmDevice(masterNum: Int, areaID: Int)
+
+    /**
+     * 一键呼叫
+     *
+     */
+    fun extCall()
+
+    /**
+     * 一键报警
+     *
+     */
+    fun extAlarm()
+
+    fun setTalkViewFullScreen(needFullScreen: Boolean)
+
+    /**
+     * 设置本地预览页面显示位置（单位px）
+     * @param left 对讲页面离屏幕左间距
+     * @param top 对讲页面离屏幕上间距
+     * @param width 对讲页面宽
+     * @param height 对讲页面高
+     */
+    fun setPreViewPosition(left: Int, top: Int, width: Int, height: Int)
+
+    /**
+     * 设置本地预览视频隐藏
+     *
+     * @param hide 隐藏视频 true隐藏 false显示
+     */
+    fun hidePreView(hide: Boolean)
+
+    /**
+     * 设置咪头使能
+     *
+     * @param enable
+     */
+    fun setMicEna(enable: Boolean)
+
+
+    /**
+     * 本机摄像头拍照
+     */
+    fun initFrame()
+
+    /**
+     * 开启启动发送数据
+     */
+    fun startTakeFrame()
+
+    /**
+     * 设置采集图像宽高
+     * @param width Int
+     * @param height Int
+     */
+    fun setViewWidthHeight(width:Int,height:Int)
+
+    /**
+     * 对讲终端人员信息回调接口
+     *
+     * @param callBack 返回人员信息
+     */
+    fun onTalkPeopleInfoCallback(callBack: Result<GeneralUDPBean>)
 }
 
 /**
@@ -284,6 +388,24 @@ class TalkEvent {
 
     override fun toString(): String {
         return "TalkEvent(deviceInfo=$deviceInfo, eventID=$eventID)"
+    }
+
+}
+class GeneralUDPBean {
+    var action: String? = null
+    var interCmd: String? = null
+    var slaveCode: String? = null
+    var name: String? = null
+    var code: String? = null
+    var event: String? = null
+    var displayNum: String? = null
+    var areaID: String? = null
+    var BranchCode: String? = null
+    var PersonType :String? = null
+    var RoomNum: String? = null
+
+    override fun toString(): String {
+        return "GeneralUDPBean(action=$action, interCmd=$interCmd, slaveCode=$slaveCode, name=$name, code=$code, event=$event, displayNum=$displayNum, areaID=$areaID, BranchCode=$BranchCode, PersonType=$PersonType, RoomNum=$RoomNum)"
     }
 
 }
