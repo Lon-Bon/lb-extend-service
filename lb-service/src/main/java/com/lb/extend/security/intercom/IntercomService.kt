@@ -3,6 +3,7 @@ package com.lb.extend.security.intercom
 import android.util.SparseArray
 import com.zclever.ipc.annotation.BindImpl
 import com.zclever.ipc.core.Result
+import java.io.File
 
 @BindImpl("com.lonbon.intercom_provider.IntercomServiceImpl")
 interface IntercomService {
@@ -275,7 +276,29 @@ interface IntercomService {
      * @param callBack 返回人员信息
      */
     fun onTalkPeopleInfoCallback(callBack: Result<GeneralUDPBean>)
+
+    /**
+     * 设置通话记录保存路径
+     * @param path String
+     * @param callBack Result<String>
+     */
+    fun setRecordPath(path:String,callBack: Result<String>)
+
+    /**
+     * 获取路径下的文件
+     * @param path String
+     * @param callBack Result<File>
+     */
+    fun getFileList(path:String,callBack: Result<File>)
+
+    /**
+     * 删除文件
+     * @param file File
+     * @param callBack Result<Boolean>
+     */
+    fun deleteFile(file:File,callBack: Result<Boolean>)
 }
+
 
 /**
  * 门磁状态信息

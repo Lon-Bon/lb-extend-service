@@ -9,9 +9,9 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$USER_HOME$/work/work/projects/git_android_project/lb-extend-service" />
-            <option value="$USER_HOME$/work/work/projects/git_android_project/lb-extend-service/app" />
-            <option value="$USER_HOME$/work/work/projects/git_android_project/lb-extend-service/lb-service" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/lb-service" />
           </set>
         </option>
       </GradleProjectSettings>
