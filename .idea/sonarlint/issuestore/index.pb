@@ -15,3 +15,7 @@ A
 gradle.properties,2/a/2afbb999f001938c88fa43fc2ef52abf0f8213e4
 I
 gradle/publish_aar.gradle,2/9/29604d655e6404e45ac5b28e98a71e53c440929c
+p
+@lb-service/src/main/java/com/lb/extend/service/ILonbonService.kt,b/d/bddc1d21a767254c7d0996df0cdeeadeb5d743c2
+G
+lb-service/build.gradle,b/2/b2d79f5f4df11e66297e05ade96f5290c089c1ab

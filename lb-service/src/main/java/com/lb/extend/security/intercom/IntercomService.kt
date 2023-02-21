@@ -287,16 +287,16 @@ interface IntercomService {
     /**
      * 获取路径下的文件
      * @param path String
-     * @param callBack Result<File>
+     * @param callBack Result<ArrayList<File>>
      */
-    fun getFileList(path:String,callBack: Result<File>)
+    fun getFileList(path:String,callBack: Result<ArrayList<File>>)
 
     /**
      * 删除文件
-     * @param file File
+     * @param path String
      * @param callBack Result<Boolean>
      */
-    fun deleteFile(file:File,callBack: Result<Boolean>)
+    fun deleteFile(path:String,callBack: Result<Boolean>)
 }
 
 
