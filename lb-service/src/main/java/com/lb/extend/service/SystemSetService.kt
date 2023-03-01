@@ -45,6 +45,7 @@ interface SystemSetService {
     /**
      * 开关屏
      * @param open 开关：true 为开屏， false为关屏
+     * 2023/03/01
      */
     fun panelPowerControl(open:Boolean)
 
