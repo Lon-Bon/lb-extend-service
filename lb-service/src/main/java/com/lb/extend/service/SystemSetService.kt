@@ -1,5 +1,6 @@
 package com.lb.extend.service
 
+import android.graphics.Bitmap
 import com.lb.extend.command.LonbonEvent
 import com.zclever.ipc.annotation.BindImpl
 
@@ -45,8 +46,21 @@ interface SystemSetService {
     /**
      * 开关屏
      * @param open 开关：true 为开屏， false为关屏
-     * 2023/03/01
      */
     fun panelPowerControl(open:Boolean)
 
+    /**
+     * 重启
+     */
+    fun rebootControl()
+
+    /**
+     * 截图
+     * */
+    fun screenshotControl()
+
+    /**
+     * 截图结果返回
+     * */
+    fun setObtainScreenshotCallback(callBack: Result<Bitmap>)
 }
