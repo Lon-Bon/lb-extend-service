@@ -58,9 +58,4 @@ interface SystemSetService {
      * 截图
      * */
     fun screenshotControl()
-
-    /**
-     * 截图结果返回
-     * */
-    fun setObtainScreenshotCallback(callBack: Result<Bitmap>)
 }

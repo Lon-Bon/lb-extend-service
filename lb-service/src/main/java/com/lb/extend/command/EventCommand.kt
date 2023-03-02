@@ -128,3 +128,13 @@ object ANW4Command{
     const val LB_ANW4_LONG_PRESS = "anw4_long_press"
 }
 
+/**
+ * 通用功能 事件
+ */
+object GeneralCommand{
+    /**
+     *  ANW4报警器短按
+     */
+    const val SCREEN_SHOT_RESULT = "screen_shot_result"
+}
+
