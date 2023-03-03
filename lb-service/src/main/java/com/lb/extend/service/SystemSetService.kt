@@ -58,4 +58,14 @@ interface SystemSetService {
      * 截图
      * */
     fun screenshotControl()
+
+    /**
+     * 升级
+     * */
+    fun upgradeApp(path: String,packageName: String)
+
+    /**
+     * 同步系统时间
+     * */
+    fun updateSystemTime(newTime: Long)
 }
