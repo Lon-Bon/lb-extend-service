@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'com.github.dcendents.android-maven'
-    id 'kotlin-kapt'
 }
 
 properties.put("MAVEN_REPO_TYPE","REMOT")
