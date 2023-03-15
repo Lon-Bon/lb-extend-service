@@ -317,7 +317,17 @@ interface InfoService {
 }
 ```
 
+**4.**服务端异常重连
 
+- 服务端崩溃异常，客户端会自动重连，同时会反馈给客户端，通过IpcManager设置一个服务死亡回调：
+
+  ```kotlin
+  IpcManager.serverDeath={
+              Log.i(TAG, "server dead!!")
+  }
+  ```
+
+  
 
 ### 以下是取摄像头数据流的方案，有取摄像头数据流需求的话往下看
 

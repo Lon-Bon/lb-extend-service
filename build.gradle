@@ -1,6 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.kotlin_version = "1.4.0"
+    ext.cacheChangingModulesForDisable = false
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
@@ -28,4 +29,18 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+configurations.all {
+    resolutionStrategy {
+        /**
+         * 增加 snapshot 缓存策略开关，有时候，为了snapshot版本的变动可以实时生效，会加上配置 cacheChangingModulesFor 0, 'seconds'，
+         * 但是，这样就会在每次编译都要去云端比对是否有变动。所以，你可以通过在 local.properties 增加开关来控制，在不需要的时候，关闭它。
+         */
+        if (rootProject.ext.cacheChangingModulesForDisable == false) {
+            cacheChangingModulesFor 0, 'seconds'
+            //针对  dynamic （例如2.+）的配置同理
+            //cacheDynamicVersionsFor 0, 'seconds'
+        }
+    }
 }

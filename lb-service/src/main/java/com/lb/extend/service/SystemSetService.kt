@@ -69,3 +69,4 @@ interface SystemSetService {
      * */
     fun updateSystemTime(newTime: Long)
 }
+
