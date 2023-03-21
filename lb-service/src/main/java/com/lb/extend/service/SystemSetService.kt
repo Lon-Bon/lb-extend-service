@@ -42,4 +42,5 @@ interface SystemSetService {
      */
     fun cameraControl(open:Boolean)
 
+
 }

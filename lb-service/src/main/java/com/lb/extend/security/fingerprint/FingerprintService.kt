@@ -63,6 +63,23 @@ interface FingerprintService {
      */
     fun setFingerprintCompareCallBack(callBack: Result<CallbackData<FingerprintCompareResult>>)
 
+    /**
+     * 根据人员id清除本地指纹存储信息
+     * @param id String
+     */
+    fun clearFingerprintById(id: String)
+
+    /**
+     * 根据指纹特征值清除本地指纹存储信息
+     * @param feature String
+     */
+    fun clearFingerprintByFeature(feature: String)
+
+    /**
+     * 清空本地所有指纹存储信息
+     */
+    fun clearAllFingerprint()
+
 }
 
 /**

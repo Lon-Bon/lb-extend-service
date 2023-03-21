@@ -3,6 +3,7 @@ package com.lb.extend.security.intercom
 import android.util.SparseArray
 import com.zclever.ipc.annotation.BindImpl
 import com.zclever.ipc.core.Result
+import java.io.File
 
 @BindImpl("com.lonbon.intercom_provider.IntercomServiceImpl")
 interface IntercomService {
@@ -131,7 +132,173 @@ interface IntercomService {
      * @param callBack 返回状态变化的设备
      */
     fun talkEventCallback(callBack: Result<TalkEvent>)
+
+    /**
+     * 设备在线回调接口
+     *
+     * @param callBack 返回状态变为在线的设备
+     */
+    fun onDeviceOnLine(callBack: Result<DeviceInfo>)
+
+    /**
+     * 设备离线回调接口
+     *
+     * @param callBack 返回态变为离线的设备
+     */
+    fun onDeviceOffLine(callBack: Result<DeviceInfo>)
+
+    /**
+     * 监听转对讲
+     *
+     * @param callBack 返回态变为离线的设备
+     */
+    fun listenToTalk()
+
+    /**
+     * 设置视频隐藏
+     *
+     * @param hide 隐藏视频 true隐藏 false显示
+     */
+    fun hideTalkView(hide: Boolean)
+
+    /**
+     * 一键呼叫
+     */
+    fun oneKeyCall()
+
+    /**
+     * 开关本地摄像头
+     *
+     * @param open 开关本地摄像头 true打开 false关闭
+     */
+    fun openLocalCamera(open: Boolean)
+
+    /**
+     * 切断分机通话
+     *
+     * @param masterNum 主机号
+     * @param slaveNum 分机号
+     * @param areaID 区号
+     * @param devRegType 注册类型
+     */
+    fun cutCallExt(masterNum: Int, slaveNum: Int, areaID: Int, devRegType: Int)
+
+    /**
+     * 设置IPC页面显示位置（单位px）
+     * @param left 对讲页面离屏幕左间距
+     * @param top 对讲页面离屏幕上间距
+     * @param width 对讲页面宽
+     * @param height 对讲页面高
+     */
+    fun setIpcViewPosition(left: Int, top: Int, width: Int, height: Int)
+
+    /**
+     * 设置视频隐藏
+     *
+     * @param hide 隐藏视频 true隐藏 false显示
+     */
+    fun hideIpcView(hide: Boolean)
+
+    /**
+     * 设置呼叫对象
+     *
+     * @param masterNum 主机号
+     * @param areaID 区号
+     */
+    fun setCallDevice(masterNum: Int, areaID: Int)
+
+    /**
+     * 设置报警对象
+     *
+     * @param masterNum 主机号
+     * @param areaID 区号
+     */
+    fun setAlarmDevice(masterNum: Int, areaID: Int)
+
+    /**
+     * 一键呼叫
+     *
+     */
+    fun extCall()
+
+    /**
+     * 一键报警
+     *
+     */
+    fun extAlarm()
+
+    fun setTalkViewFullScreen(needFullScreen: Boolean)
+
+    /**
+     * 设置本地预览页面显示位置（单位px）
+     * @param left 对讲页面离屏幕左间距
+     * @param top 对讲页面离屏幕上间距
+     * @param width 对讲页面宽
+     * @param height 对讲页面高
+     */
+    fun setPreViewPosition(left: Int, top: Int, width: Int, height: Int)
+
+    /**
+     * 设置本地预览视频隐藏
+     *
+     * @param hide 隐藏视频 true隐藏 false显示
+     */
+    fun hidePreView(hide: Boolean)
+
+    /**
+     * 设置咪头使能
+     *
+     * @param enable
+     */
+    fun setMicEna(enable: Boolean)
+
+
+    /**
+     * 本机摄像头拍照
+     */
+    fun initFrame()
+
+    /**
+     * 开启启动发送数据
+     */
+    fun startTakeFrame()
+
+    /**
+     * 设置采集图像宽高
+     * @param width Int
+     * @param height Int
+     */
+    fun setViewWidthHeight(width:Int,height:Int)
+
+    /**
+     * 对讲终端人员信息回调接口
+     *
+     * @param callBack 返回人员信息
+     */
+    fun onTalkPeopleInfoCallback(callBack: Result<GeneralUDPBean>)
+
+    /**
+     * 设置通话记录保存路径
+     * @param path String
+     * @param callBack Result<String>
+     */
+    fun setRecordPath(path:String,callBack: Result<String>)
+
+    /**
+     * 获取路径下的文件
+     * @param path String
+     * @param callBack Result<ArrayList<File>>
+     */
+    fun getFileList(path:String,callBack: Result<ArrayList<File>>)
+
+    /**
+     * 删除文件
+     * @param path String
+     * @param callBack Result<Boolean>
+     */
+    fun deleteFile(path:String,callBack: Result<Boolean>)
 }
+
 
 /**
  * 门磁状态信息
@@ -244,6 +411,24 @@ class TalkEvent {
 
     override fun toString(): String {
         return "TalkEvent(deviceInfo=$deviceInfo, eventID=$eventID)"
+    }
+
+}
+class GeneralUDPBean {
+    var action: String? = null
+    var interCmd: String? = null
+    var slaveCode: String? = null
+    var name: String? = null
+    var code: String? = null
+    var event: String? = null
+    var displayNum: String? = null
+    var areaID: String? = null
+    var BranchCode: String? = null
+    var PersonType :String? = null
+    var RoomNum: String? = null
+
+    override fun toString(): String {
+        return "GeneralUDPBean(action=$action, interCmd=$interCmd, slaveCode=$slaveCode, name=$name, code=$code, event=$event, displayNum=$displayNum, areaID=$areaID, BranchCode=$BranchCode, PersonType=$PersonType, RoomNum=$RoomNum)"
     }
 
 }

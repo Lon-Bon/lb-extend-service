@@ -11,4 +11,9 @@ interface SystemSettingService {
      */
     fun setSystemTime(time: Long)
 
+    /**
+     * 重启设备
+     */
+    fun rebootSystem()
+
 }
