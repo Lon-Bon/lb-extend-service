@@ -50,7 +50,18 @@ interface IBroadcastService {
      * @param callBack Result<SerialEvent>
      */
     fun onToastListener(callBack: Result<String>)
+
+    /**
+     * 喊话广播相关状态回调
+     * @param callBack Result<SpeakBroadcastState>
+     */
     fun onSpeakBroadcastListener(callBack: Result<SpeakBroadcastState>)
+
+    /**
+     * 设备IO事件回调
+     * @param callBack Result<Int>
+     */
+    fun onIONotifyListener(callBack: Result<Int>)
 
 
     class AreaDivision {
