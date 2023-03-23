@@ -119,7 +119,7 @@ interface IMonitorService {
     fun onRelayServerListener(callBack: Result<RegisterEvent>)
 
     /**
-     * 右屏监控Toast提示
+     * 右屏串口Toast提示
      * @param callBack Result<SerialEvent>
      */
     fun onSerialEventListener(callBack: Result<SerialEvent>)

@@ -46,7 +46,7 @@ interface IBroadcastService {
     fun stopSpeakBroadcast(paramId: Int)
 
     /**
-     * 右屏监控Toast提示
+     * Toast提示
      * @param callBack Result<SerialEvent>
      */
     fun onToastListener(callBack: Result<String>)
