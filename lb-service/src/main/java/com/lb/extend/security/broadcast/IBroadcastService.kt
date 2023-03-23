@@ -64,46 +64,48 @@ interface IBroadcastService {
     fun onIONotifyListener(callBack: Result<Int>)
 
 
-    class AreaDivision {
-        /**
-         * 广播中的区号
-         */
-        var broadAreaNum = 0
 
-        /**
-         * 地址盒区域Id
-         */
-        var areaId = 0
+}
 
-        /**
-         * 主机编号
-         */
-        var masterNum = 0
+class AreaDivision {
+    /**
+     * 广播中的区号
+     */
+    var broadAreaNum = 0
 
-        /**
-         * 设备6位displayNum
-         */
-        var displayNum = 0
+    /**
+     * 地址盒区域Id
+     */
+    var areaId = 0
 
-        /**
-         * 设备注册类型
-         */
-        var devRegType = 0
+    /**
+     * 主机编号
+     */
+    var masterNum = 0
 
-        fun isMaster(): Boolean {
-            return displayNum % 1000 == 0
-        }
+    /**
+     * 设备6位displayNum
+     */
+    var displayNum = 0
+
+    /**
+     * 设备注册类型
+     */
+    var devRegType = 0
+
+    fun isMaster(): Boolean {
+        return displayNum % 1000 == 0
+    }
+}
+
+class SpeakBroadcastState(val event: Int){
+    companion object{
+        val onStart = 1
+        val onFailed = 2
+        val onPause = 3
+        val onStop = 4
+        val onProcessing = 5
+        val onNextFile = 6
     }
 
-    class SpeakBroadcastState(val event: Int){
-        companion object{
-            val onStart = 1
-            val onFailed = 2
-            val onPause = 3
-            val onStop = 4
-            val onProcessing = 5
-            val onNextFile = 6
-        }
-
-    }
 }

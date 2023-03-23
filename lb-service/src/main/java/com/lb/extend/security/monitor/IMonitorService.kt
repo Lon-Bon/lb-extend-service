@@ -125,66 +125,68 @@ interface IMonitorService {
     fun onSerialEventListener(callBack: Result<SerialEvent>)
 
 
-    class RegisterEvent(val event: Int, val state: String)
-    class SerialEvent(val event: Int, val state: String)
 
-    class VideoInfo {
+}
 
+class RegisterEvent(val event: Int, val state: String)
+class SerialEvent(val event: Int, val state: String)
 
-        var showTag = 0
-
-        //0是rtsp流，1是onvif
-        @SerializedName("videoMode")
-        var videoMode = 0
-
-        @SerializedName("startX")
-        var startX = 0
-
-        @SerializedName("startY")
-        var startY = 0
-
-        @SerializedName("width")
-        var width = 0
-
-        @SerializedName("height")
-        var height = 0
-
-        //视频参数，onvif模式按分号隔开，按冒号key:value(ip:192.168.1.141;port:8554;username:admin;password:admin)
-        @SerializedName("videoParam")
-        var videoParam = ""
-
-        //是否显示描述信息（ 0 不显示； 1 显示）
-        @SerializedName("isDescDisplay")
-        var isDescDisplay = 1
+class VideoInfo {
 
 
-        @SerializedName("videoDescription")
-        var videoDescription = ""
+    var showTag = 0
 
-        @SerializedName("ipcPassword")
-        var ipcPassword = ""
+    //0是rtsp流，1是onvif
+    @SerializedName("videoMode")
+    var videoMode = 0
 
-        @SerializedName("ipcAccount")
-        var ipcAccount = ""
+    @SerializedName("startX")
+    var startX = 0
 
-        //下标顺序
-        var position = -1
+    @SerializedName("startY")
+    var startY = 0
 
-        //监控分组
-        private val monitorId = -1
-    }
+    @SerializedName("width")
+    var width = 0
 
-    class BaseMonitorResponse {
-        @SerializedName("action")
-        var action = ""
+    @SerializedName("height")
+    var height = 0
 
-        @SerializedName("status")
-        var status: String? = null
+    //视频参数，onvif模式按分号隔开，按冒号key:value(ip:192.168.1.141;port:8554;username:admin;password:admin)
+    @SerializedName("videoParam")
+    var videoParam = ""
 
-        @SerializedName("body")
-        var body = JsonObject()
+    //是否显示描述信息（ 0 不显示； 1 显示）
+    @SerializedName("isDescDisplay")
+    var isDescDisplay = 1
 
-        val isSuccess: Boolean
-            get() = "1" == status
-    }
+
+    @SerializedName("videoDescription")
+    var videoDescription = ""
+
+    @SerializedName("ipcPassword")
+    var ipcPassword = ""
+
+    @SerializedName("ipcAccount")
+    var ipcAccount = ""
+
+    //下标顺序
+    var position = -1
+
+    //监控分组
+    private val monitorId = -1
+}
+
+class BaseMonitorResponse {
+    @SerializedName("action")
+    var action = ""
+
+    @SerializedName("status")
+    var status: String? = null
+
+    @SerializedName("body")
+    var body = JsonObject()
+
+    val isSuccess: Boolean
+        get() = "1" == status
 }
