@@ -96,6 +96,34 @@ class AreaDivision {
     fun isMaster(): Boolean {
         return displayNum % 1000 == 0
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as AreaDivision
+
+        if (areaId != other.areaId) return false
+        if (masterNum != other.masterNum) return false
+        if (displayNum != other.displayNum) return false
+        if (devRegType != other.devRegType) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = areaId
+        result = 31 * result + masterNum
+        result = 31 * result + displayNum
+        result = 31 * result + devRegType
+        return result
+    }
+
+    override fun toString(): String {
+        return "AreaDivision(broadAreaNum=$broadAreaNum, areaId=$areaId, masterNum=$masterNum, displayNum=$displayNum, devRegType=$devRegType)"
+    }
+
+
 }
 
 class SpeakBroadcastState(val event: Int){

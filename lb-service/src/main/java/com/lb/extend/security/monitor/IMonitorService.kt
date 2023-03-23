@@ -175,6 +175,33 @@ class VideoInfo {
 
     //监控分组
     private val monitorId = -1
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as VideoInfo
+
+        if (videoMode != other.videoMode) return false
+        if (videoParam != other.videoParam) return false
+        if (ipcAccount != other.ipcAccount) return false
+        if (monitorId != other.monitorId) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = videoMode
+        result = 31 * result + videoParam.hashCode()
+        result = 31 * result + ipcAccount.hashCode()
+        result = 31 * result + monitorId
+        return result
+    }
+
+    override fun toString(): String {
+        return "VideoInfo(showTag=$showTag, videoMode=$videoMode, startX=$startX, startY=$startY, width=$width, height=$height, videoParam='$videoParam', isDescDisplay=$isDescDisplay, videoDescription='$videoDescription', ipcPassword='$ipcPassword', ipcAccount='$ipcAccount', position=$position, monitorId=$monitorId)"
+    }
+
+
 }
 
 class BaseMonitorResponse {
