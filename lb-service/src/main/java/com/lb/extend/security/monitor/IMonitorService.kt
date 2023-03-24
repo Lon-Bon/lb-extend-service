@@ -134,47 +134,48 @@ class SerialEvent(val event: Int, val state: String)
 class VideoInfo {
 
 
-    var showTag = 0
+    var showTag :Int = 0
 
     //0是rtsp流，1是onvif
     @SerializedName("videoMode")
-    var videoMode = 0
+    var videoMode:Int = 0
 
     @SerializedName("startX")
-    var startX = 0
+    var startX:Int = 0
 
     @SerializedName("startY")
-    var startY = 0
+    var startY:Int = 0
 
     @SerializedName("width")
-    var width = 0
+    var width:Int = 0
 
     @SerializedName("height")
-    var height = 0
+    var height:Int = 0
 
     //视频参数，onvif模式按分号隔开，按冒号key:value(ip:192.168.1.141;port:8554;username:admin;password:admin)
     @SerializedName("videoParam")
-    var videoParam = ""
+    var videoParam:String = ""
 
     //是否显示描述信息（ 0 不显示； 1 显示）
     @SerializedName("isDescDisplay")
-    var isDescDisplay = 1
+    var isDescDisplay:Int = 1
 
 
     @SerializedName("videoDescription")
-    var videoDescription = ""
+    var videoDescription:String = ""
 
     @SerializedName("ipcPassword")
-    var ipcPassword = ""
+    var ipcPassword:String = ""
 
     @SerializedName("ipcAccount")
-    var ipcAccount = ""
+    var ipcAccount:String = ""
 
     //下标顺序
-    var position = -1
+    var position:Int = -1
 
     //监控分组
-    private val monitorId = -1
+    private var monitorId:Int  = -1
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -206,7 +207,7 @@ class VideoInfo {
 
 class BaseMonitorResponse {
     @SerializedName("action")
-    var action = ""
+    var action:String = ""
 
     @SerializedName("status")
     var status: String? = null

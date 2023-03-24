@@ -71,27 +71,27 @@ class AreaDivision {
     /**
      * 广播中的区号
      */
-    var broadAreaNum = 0
+    var broadAreaNum:Int = 0
 
     /**
      * 地址盒区域Id
      */
-    var areaId = 0
+    var areaId:Int = 0
 
     /**
      * 主机编号
      */
-    var masterNum = 0
+    var masterNum:Int = 0
 
     /**
      * 设备6位displayNum
      */
-    var displayNum = 0
+    var displayNum:Int = 0
 
     /**
      * 设备注册类型
      */
-    var devRegType = 0
+    var devRegType:Int = 0
 
     fun isMaster(): Boolean {
         return displayNum % 1000 == 0
