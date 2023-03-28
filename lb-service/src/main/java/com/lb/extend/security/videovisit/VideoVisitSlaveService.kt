@@ -68,13 +68,13 @@ interface VideoVisitSlaveService {
 
     /**
      * 是否繁忙：state>=2
-     * @return Int
+     * @return Boolean
      */
-    fun isBusy(): Int
+    fun isBusy(): Boolean
 
     /**
      * 是否空闲：state是否为1
-     * @return Int
+     * @return Boolean
      */
-    fun isIdle(): Int
+    fun isIdle(): Boolean
 }
