@@ -23,10 +23,21 @@ import com.zclever.ipc.core.Result
 interface IMonitorService {
 
     /**
-     * 设置右屏监控IP
-     * @param ip String
+     * 获取右屏监控IP
+     * @param callBack Result<String>
      */
-    fun setMonitorIP(ip: String)
+    fun getMonitorIP(callBack: Result<String>)
+    /**
+     * 获取右屏监控端口
+     * @param callBack Result<Int>
+     */
+    fun getMonitorPort(callBack: Result<Int>)
+
+    /**
+     * 获取右屏拉流地址
+     * @param callBack Result<String>
+     */
+    fun getMonitorURL(callBack: Result<String>)
 
     /**
      * 初始化启监控模块
