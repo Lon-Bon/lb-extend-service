@@ -297,6 +297,13 @@ interface IntercomService {
      * @param callBack Result<Boolean>
      */
     fun deleteFile(path:String,callBack: Result<Boolean>)
+
+    /**
+     * 隐藏和显示对讲视频框
+     *
+     * @param hide 隐藏视频 true隐藏 false显示
+     */
+    fun hideRemoteVideoView(hide: Boolean)
 }
 
 

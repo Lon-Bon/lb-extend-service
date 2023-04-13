@@ -70,6 +70,15 @@ interface ISipServerService {
      */
     fun sipHangup(sipNum:String,dataType:Int):String
 
+    /**
+     * sip 语音呼叫
+     * @param sipNum String sip账号
+     * @return String 异常的提示
+     * @param dataType Int 设备 类型 2 默认是 sip 3 手机号码 4 固话
+     */
+    fun sipAudioCall(sipNum:String,dataType:Int):String
+
+
 }
 
 class SipEvent{
