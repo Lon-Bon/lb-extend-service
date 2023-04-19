@@ -304,20 +304,8 @@ class CommonActivity : AppCompatActivity() {
 }
 ```
 
-**3.**传输大数据：
 
-- 传输大数据需要设计接口的时候，形参使用***BigData***修饰就可以了。需要注意的是在一个函数里面只能出现一次，而且修饰的类型必须为字节数组，不能是其他类型，考虑到需要传输大数据的场景用字节数组就足够了，接口设计如下*sendBigData*示例：
-
-```
-@BindImpl("com.demo.ipc.InfoServiceManager")
-interface InfoService {
-
-    fun sendBigData(@BigData data: ByteArray)
-
-}
-```
-
-**4.**服务端异常重连
+**3.**服务端异常重连
 
 - 服务端崩溃异常，客户端会自动重连，同时会反馈给客户端，通过IpcManager设置一个服务死亡回调：
 
