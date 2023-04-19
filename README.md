@@ -418,3 +418,94 @@ class VideoActivity : AppCompatActivity() {
 }
 ```
 
+服务端需要继承VideoService，并将实例放置到IpcManager当中去
+
+```kotlin
+/**
+ * 这个类是模拟发送数据
+ */
+object VideoManager : VideoService() {
+
+    private const val TAG = "VideoManager"
+
+    @Volatile
+    var sendFrame = false
+
+    override fun takePicture(pictureFormat: Int) {
+
+        jpegPictureData?.let {
+            onTakePicture(it, 1410, 882, it.size, PictureFormat.JPEG.format)
+        }
+    }
+
+    override fun takeFrame(type: Int) {
+        sendFrame = true
+    }
+
+    override fun stopTakeFrame() {
+        sendFrame = false
+    }
+
+    val handler = Handler(Looper.getMainLooper())
+
+    val frameData = ByteArray(10) { i ->
+        i.toByte()
+    }
+
+    private val runnable = object : Runnable {
+        override fun run() {
+
+            if (sendFrame) {
+                frameData[0]++
+
+                onTakeFrame(
+                    frameData, 640, 480, 10, FrameType.NV21.type
+                )
+
+            }
+
+            handler.postDelayed(this, 150)
+        }
+
+    }
+
+    init {
+        handler.post(runnable)
+    }
+
+    var jpegPictureData: ByteArray? = null
+
+}
+```
+
+```kotlin
+class MainActivity : AppCompatActivity() {
+
+    companion object {
+        private const val TAG = "MainActivity"
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        IpcManager.config(Config.builder().configDebug(true).build())
+        IpcManager.initVideoService(VideoManager) //初始化视频服务,用于提供视频数据,要提前设置好
+
+        assets.open("kotlin.jpeg").use {
+            VideoManager.jpegPictureData=it.readBytes()
+        }
+
+    }
+
+    fun commonJump(view: View) {
+        startActivity(Intent(this, CommonActivity::class.java))
+    }
+
+    fun videoJump(view: View) {
+        startActivity(Intent(this, VideoActivity::class.java))
+    }
+
+
+}
+```
+

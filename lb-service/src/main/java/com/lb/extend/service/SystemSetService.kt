@@ -1,5 +1,6 @@
 package com.lb.extend.service
 
+import android.graphics.Bitmap
 import com.lb.extend.command.LonbonEvent
 import com.zclever.ipc.annotation.BindImpl
 
@@ -42,5 +43,30 @@ interface SystemSetService {
      */
     fun cameraControl(open:Boolean)
 
+    /**
+     * 开关屏
+     * @param open 开关：true 为开屏， false为关屏
+     */
+    fun panelPowerControl(open:Boolean)
 
+    /**
+     * 重启
+     */
+    fun rebootControl()
+
+    /**
+     * 截图
+     * */
+    fun screenshotControl()
+
+    /**
+     * 升级
+     * */
+    fun upgradeApp(path: String,packageName: String)
+
+    /**
+     * 同步系统时间
+     * */
+    fun updateSystemTime(newTime: Long)
 }
+
