@@ -23,4 +23,26 @@ interface EducationService {
      */
     fun exit()
 
+    /**
+     * 是否执行电教任务
+     * @param isExecute 是否执行 true:执行，false：不执行
+     */
+    fun setEduTaskExecuteState(isExecute: Boolean)
+
+    /**
+     * 退出电教任务
+     */
+    fun exitEduTask()
+
+    /**
+     * 电教任务状态
+     */
+    fun hasEduTask(): Boolean
+
+    /**
+     * HDMI配置
+     * @param outputConfigure 1:一直有信号输出，2：仅在设备接收到信息发布或点播直播任务时有信号输出
+     */
+    fun setHDMIConfigure(outputConfigure: Int)
+
 }
