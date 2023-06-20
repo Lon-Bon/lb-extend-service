@@ -45,4 +45,10 @@ interface EducationService {
      */
     fun setHDMIConfigure(outputConfigure: Int)
 
+    /**
+     * 电教任务监听器
+     * @param isExistTask：是否存在电教任务
+     */
+    fun setEduTaskListener(isExistTask: ((Boolean) -> Unit))
+
 }
