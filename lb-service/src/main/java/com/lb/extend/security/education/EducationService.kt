@@ -47,12 +47,7 @@ interface EducationService {
 
     /**
      * 电教任务监听器
-     * @param isExistTask：是否存在电教任务
      */
-    fun setEduTaskListener(isExistTask: ((Boolean) -> Unit))
+    fun setEduTaskListener(callBack: (function: () -> Unit) -> Unit)
 
-    /**
-     * 是否跳进电教页面
-     */
-    fun jumpToEduTask(isJump: Boolean)
 }
