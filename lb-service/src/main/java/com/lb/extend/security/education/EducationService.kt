@@ -51,4 +51,8 @@ interface EducationService {
      */
     fun setEduTaskListener(isExistTask: ((Boolean) -> Unit))
 
+    /**
+     * 是否跳进电教页面
+     */
+    fun jumpToEduTask(isJump: Boolean)
 }
