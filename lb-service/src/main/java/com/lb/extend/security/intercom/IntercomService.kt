@@ -304,6 +304,18 @@ interface IntercomService {
      * @param hide 隐藏视频 true隐藏 false显示
      */
     fun hideRemoteVideoView(hide: Boolean)
+
+    /**
+     * 主机设置分机通话音量
+     * @param volume 范围 0-5
+     */
+    fun setSlaveTalkVolume(volume: Int)
+
+    /**
+     * 主机获取分机通话音量
+     */
+    fun getSlaveTalkVolume(): Int
+
 }
 
 
