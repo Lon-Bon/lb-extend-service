@@ -11,12 +11,10 @@ interface EducationService {
      */
     fun init()
 
-
     /**
      * 跳转到电教点播直播首页Activity
      */
     fun startActivity()
-
 
     /**
      * 退出电教页面
@@ -44,10 +42,5 @@ interface EducationService {
      * @param outputConfigure 1:一直有信号输出，2：仅在设备接收到信息发布或点播直播任务时有信号输出
      */
     fun setHDMIConfigure(outputConfigure: Int)
-
-    /**
-     * 电教任务监听器
-     */
-    fun setEduTaskListener(callBack: (function: () -> Unit) -> Unit)
 
 }
