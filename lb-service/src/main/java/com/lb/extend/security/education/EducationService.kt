@@ -1,6 +1,7 @@
 package com.lb.extend.security.education
 
 import com.zclever.ipc.annotation.BindImpl
+import com.zclever.ipc.core.Result
 
 
 @BindImpl("com.lonbon.education_provider.EducationServiceImpl")
@@ -39,7 +40,7 @@ interface EducationService {
     /**
      * 获取电教任务状态
      */
-    fun getEducationTaskState(callBack: Result<EducationTaskStateBean>)
+    fun setEducationTaskStateListener(callBack: Result<EducationTaskStateBean>)
 
     /**
      * HDMI配置
