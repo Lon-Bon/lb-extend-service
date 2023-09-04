@@ -316,6 +316,11 @@ interface IntercomService {
      */
     fun getSlaveTalkVolume(): Int
 
+
+    /**
+     * 获取下级主机描述信息
+     */
+    fun getSubMasterList(callBack: Result<ArrayList<File>>): Int
 }
 
 
@@ -450,4 +455,23 @@ class GeneralUDPBean {
         return "GeneralUDPBean(action=$action, interCmd=$interCmd, slaveCode=$slaveCode, name=$name, code=$code, event=$event, displayNum=$displayNum, areaID=$areaID, BranchCode=$BranchCode, PersonType=$PersonType, RoomNum=$RoomNum)"
     }
 
+    /**
+     * 主机设备信息
+     *
+     * areaID: 设备区号
+     * displayNum：设备号
+     * devRegType：注册类型
+     * description：设备描述信息
+     */
+    class MasterDeviceInfo {
+        var areaID: Int = 0
+        var displayNum: Int=0
+        var devRegType: Int = 0
+        var description: String? = null
+        override fun toString(): String {
+            return "MasterDeviceInfo(description=$description, displayNum=$displayNum, areaID=$areaID)"
+        }
+
+
+    }
 }
