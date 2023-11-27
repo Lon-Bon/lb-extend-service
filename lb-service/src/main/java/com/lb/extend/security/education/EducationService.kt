@@ -48,6 +48,11 @@ interface EducationService {
      */
     fun setHDMIConfigure(outputConfigure: Int)
 
+    /**
+     *  双屏异常异声开关，0:仅从电视输出，1:声音和终端声音同步输出
+     */
+    fun setAudioSyncOutput(enable: Int)
+
 }
 
 
