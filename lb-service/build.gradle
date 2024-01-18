@@ -44,8 +44,8 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api 'com.github.zhanggaoming.android-ipc:ipc-core:3.1.2'
-    kapt 'com.github.zhanggaoming.android-ipc:ipc-compiler:3.1.2'
+    api 'com.github.zhanggaoming.android-ipc:ipc-core:5dd5fd86f7'
+    kapt 'com.github.zhanggaoming.android-ipc:ipc-compiler:5dd5fd86f7'
 }
 
 
