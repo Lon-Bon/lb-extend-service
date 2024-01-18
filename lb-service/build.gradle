@@ -45,8 +45,8 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.google.code.gson:gson:2.8.7'
-    api 'com.github.zhanggaoming.android-ipc:ipc-core:7ef5c69436'
-    kapt 'com.github.zhanggaoming.android-ipc:ipc-compiler:7ef5c69436'
+    api 'com.github.zhanggaoming.android-ipc:ipc-core:b3b47c5b71'
+    kapt 'com.github.zhanggaoming.android-ipc:ipc-compiler:b3b47c5b71'
 }
 
 
