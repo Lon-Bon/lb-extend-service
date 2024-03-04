@@ -321,6 +321,14 @@ interface IntercomService {
      * 获取下级主机描述信息
      */
     fun getSubMasterList(callBack: Result<ArrayList<MasterDeviceInfo>>): Int
+
+    /**
+     * 开始/停止录音，调用后存储录音文件
+     *
+     * @param start 开始/停止录音 true开始 false停止
+     * @param filePath 录音文件绝对路径名
+     */
+    fun mediaStartRecord(start: Boolean, filePath: String) : Int
 }
 
 
