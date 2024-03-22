@@ -20,13 +20,13 @@ interface SystemSettingService {
     /**
      * 获取屏幕像素密度
      */
-    fun getScreenDensity(): Int
+    fun getScreenDensityDpi(): Int
 
 
     /**
      * 设置屏幕像素密度,实现对屏幕的缩放效果
      */
-    fun setScreenDensity(): Int
+    fun setScreenDensityDpi(densityDpi: Int)
 
 
     /**
@@ -60,7 +60,6 @@ interface SystemSettingService {
      * packageName ： apk文件的包名
      */
     fun uninstallApkSilently(packageName: String)
-
 
 
 

@@ -335,7 +335,7 @@ interface IntercomService {
      * 设置对讲io事件回调
      * eg: 物理按键呼叫、物理按键报警
      */
-    fun setIOEventCallBack(callBack: Result<IntercomIOEventType>)
+    fun setIOEventCallBack(callBack: Result<IntercomIOEventType>?)
 
 }
 
