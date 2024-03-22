@@ -16,4 +16,53 @@ interface SystemSettingService {
      */
     fun rebootSystem()
 
+
+    /**
+     * 获取屏幕像素密度
+     */
+    fun getScreenDensity(): Int
+
+
+    /**
+     * 设置屏幕像素密度,实现对屏幕的缩放效果
+     */
+    fun setScreenDensity(): Int
+
+
+    /**
+     * 导航栏虚拟按键的显示、隐藏
+     * isVisible true:显示   false：隐藏
+     */
+    fun setNavigationVisible(isVisible: Boolean)
+
+    /**
+     * 设置媒体音量
+     */
+    fun setDeviceMediaVolume(volume: Int)
+
+
+    /**
+     * 设置是否亮屏
+     * true:亮屏   false： 息屏
+     */
+    fun setIsBrightScreen(isBrightScreen: Boolean)
+
+
+    /**
+     * 静默安装apk
+     * apkPath ： apk文件的绝对路径
+     */
+    fun installApkSilently(apkPath: String)
+
+
+    /**
+     * 静默卸载apk
+     * packageName ： apk文件的包名
+     */
+    fun uninstallApkSilently(packageName: String)
+
+
+
+
+
 }

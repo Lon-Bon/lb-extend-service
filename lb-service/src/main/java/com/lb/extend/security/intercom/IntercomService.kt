@@ -329,6 +329,14 @@ interface IntercomService {
      * @param filePath 录音文件绝对路径名
      */
     fun mediaStartRecord(start: Boolean, filePath: String) : Int
+
+
+    /**
+     * 设置对讲io事件回调
+     * eg: 物理按键呼叫、物理按键报警
+     */
+    fun setIOEventCallBack(callBack: Result<IntercomIOEventType>)
+
 }
 
 
@@ -481,4 +489,17 @@ class MasterDeviceInfo {
     }
 
 
+}
+
+
+
+/**
+ * 对讲IO事件密封类
+ * 可根据项目需求后续扩展
+ */
+sealed class IntercomIOEventType {
+    // 物理按键呼叫
+    object CallButtonPush : IntercomIOEventType()
+    //物理按钮报警
+    object AlarmButtonPush : IntercomIOEventType()
 }
