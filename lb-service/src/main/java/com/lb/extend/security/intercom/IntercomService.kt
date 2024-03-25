@@ -268,7 +268,7 @@ interface IntercomService {
      * @param width Int
      * @param height Int
      */
-    fun setViewWidthHeight(width:Int,height:Int)
+    fun setViewWidthHeight(width: Int, height: Int)
 
     /**
      * 对讲终端人员信息回调接口
@@ -282,21 +282,21 @@ interface IntercomService {
      * @param path String
      * @param callBack Result<String>
      */
-    fun setRecordPath(path:String,callBack: Result<String>)
+    fun setRecordPath(path: String, callBack: Result<String>)
 
     /**
      * 获取路径下的文件
      * @param path String
      * @param callBack Result<ArrayList<File>>
      */
-    fun getFileList(path:String,callBack: Result<ArrayList<File>>)
+    fun getFileList(path: String, callBack: Result<ArrayList<File>>)
 
     /**
      * 删除文件
      * @param path String
      * @param callBack Result<Boolean>
      */
-    fun deleteFile(path:String,callBack: Result<Boolean>)
+    fun deleteFile(path: String, callBack: Result<Boolean>)
 
     /**
      * 隐藏和显示对讲视频框
@@ -328,7 +328,7 @@ interface IntercomService {
      * @param start 开始/停止录音 true开始 false停止
      * @param filePath 录音文件绝对路径名
      */
-    fun mediaStartRecord(start: Boolean, filePath: String) : Int
+    fun mediaStartRecord(start: Boolean, filePath: String): Int
 
 
     /**
@@ -454,6 +454,7 @@ class TalkEvent {
     }
 
 }
+
 class GeneralUDPBean {
     var action: String? = null
     var interCmd: String? = null
@@ -464,13 +465,14 @@ class GeneralUDPBean {
     var displayNum: String? = null
     var areaID: String? = null
     var BranchCode: String? = null
-    var PersonType :String? = null
+    var PersonType: String? = null
     var RoomNum: String? = null
 
     override fun toString(): String {
         return "GeneralUDPBean(action=$action, interCmd=$interCmd, slaveCode=$slaveCode, name=$name, code=$code, event=$event, displayNum=$displayNum, areaID=$areaID, BranchCode=$BranchCode, PersonType=$PersonType, RoomNum=$RoomNum)"
     }
 }
+
 /**
  * 主机设备信息
  *
@@ -481,7 +483,7 @@ class GeneralUDPBean {
  */
 class MasterDeviceInfo {
     var areaID: Int = 0
-    var displayNum: Int=0
+    var displayNum: Int = 0
     var devRegType: Int = 0
     var description: String? = null
     override fun toString(): String {
@@ -492,14 +494,31 @@ class MasterDeviceInfo {
 }
 
 
-
 /**
  * 对讲IO事件密封类
  * 可根据项目需求后续扩展
+ * eventType: CALL_BUTTON_PUSH->物理按键呼叫   ALARM_BUTTON_PUSH->物理按钮报警
  */
-sealed class IntercomIOEventType {
-    // 物理按键呼叫
-    object CallButtonPush : IntercomIOEventType()
-    //物理按钮报警
-    object AlarmButtonPush : IntercomIOEventType()
+data class IntercomIOEventType(
+    val eventType: Int
+) {
+
+    companion object {
+
+        /**
+         * 物理按键呼叫
+         */
+        const val CALL_BUTTON_PUSH = 5
+
+        /**
+         * 物理按钮报警
+         */
+        const val ALARM_BUTTON_PUSH = 7
+
+    }
+
+
 }
+
+
+
