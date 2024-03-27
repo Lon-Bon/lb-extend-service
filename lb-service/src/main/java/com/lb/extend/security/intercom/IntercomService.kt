@@ -333,9 +333,9 @@ interface IntercomService {
 
     /**
      * 设置对讲io事件回调
-     * eg: 物理按键呼叫、物理按键报警
+     * eg: 物理按键呼叫、物理按键报警（这里只是用来处理物理按键的回调）
      */
-    fun setIOEventCallBack(callBack: Result<IntercomIOEventType>?)
+    fun setOnButtonPushCallBack(callBack: Result<Int>?)
 
 }
 
@@ -494,31 +494,6 @@ class MasterDeviceInfo {
 }
 
 
-/**
- * 对讲IO事件密封类
- * 可根据项目需求后续扩展
- * eventType: CALL_BUTTON_PUSH->物理按键呼叫   ALARM_BUTTON_PUSH->物理按钮报警
- */
-data class IntercomIOEventType(
-    val eventType: Int
-) {
-
-    companion object {
-
-        /**
-         * 物理按键呼叫
-         */
-        const val CALL_BUTTON_PUSH = 5
-
-        /**
-         * 物理按钮报警
-         */
-        const val ALARM_BUTTON_PUSH = 7
-
-    }
-
-
-}
 
 
 
