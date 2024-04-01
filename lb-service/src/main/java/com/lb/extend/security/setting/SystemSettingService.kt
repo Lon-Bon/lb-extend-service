@@ -62,5 +62,22 @@ interface SystemSettingService {
     fun uninstallApkSilently(packageName: String)
 
 
+    /**
+     * 设置以太网ip
+     */
+    fun setEthernetIP(ethernetIP: String)
+
+
+    /**
+     * 设置子网掩码
+     */
+    fun setEthernetNetMask(ethernetNetMask: String)
+
+
+    /**
+     * 设置网关
+     */
+    fun setEthernetGateWay(ethernetGateWay: String)
+
 
 }
