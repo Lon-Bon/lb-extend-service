@@ -80,4 +80,22 @@ interface SystemSettingService {
     fun setEthernetGateWay(ethernetGateWay: String)
 
 
+    /**
+     * 获取子网掩码
+     */
+    fun getEthernetNetMask(): String
+
+
+    /**
+     * 获取设备ip
+     */
+    fun getEthernetIP(): String
+
+
+    /**
+     * 获取网关
+     */
+    fun getEthernetGateWay(): String
+
+
 }
