@@ -456,6 +456,7 @@ class TalkEvent {
         this.deviceInfo = deviceInfo
         this.eventID = eventID
         this.callType = callType
+
     }
 
     override fun toString(): String {
