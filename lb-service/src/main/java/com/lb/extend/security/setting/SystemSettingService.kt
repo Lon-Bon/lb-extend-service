@@ -63,39 +63,36 @@ interface SystemSettingService {
 
 
     /**
-     * 设置以太网ip
+     * 获取设备ip
      */
-    fun setEthernetIP(ethernetIP: String)
-
-
-    /**
-     * 设置子网掩码
-     */
-    fun setEthernetNetMask(ethernetNetMask: String)
-
-
-    /**
-     * 设置网关
-     */
-    fun setEthernetGateWay(ethernetGateWay: String)
+    fun getDefaultEthernetIP(): String
 
 
     /**
      * 获取子网掩码
      */
-    fun getEthernetNetMask(): String
-
-
-    /**
-     * 获取设备ip
-     */
-    fun getEthernetIP(): String
+    fun getDefaultEthernetNetMask(): String
 
 
     /**
      * 获取网关
      */
-    fun getEthernetGateWay(): String
+    fun getDefaultEthernetGateWay(): String
+
+
+    /**
+     * 获取默认网卡以太网IP
+     */
+    fun getDefaultIFace(): String
+
+
+    /**
+     * 设置以太网信息
+     * ethernetIP: 设备ip
+     * ethernetNetMask：子网掩码
+     * ethernetGateWay： 网关
+     */
+    fun setEthernetInfo(ethernetIP: String?, ethernetNetMask: String?, ethernetGateWay: String?)
 
 
 }
