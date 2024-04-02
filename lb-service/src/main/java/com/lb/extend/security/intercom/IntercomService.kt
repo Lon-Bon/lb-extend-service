@@ -444,14 +444,24 @@ class TalkEvent {
     var deviceInfo: DeviceInfo? = null
     var eventID: Int = 0
 
+    //呼叫类型
+    var callType: Int = 0
+
     constructor(deviceInfo: DeviceInfo?, eventID: Int) {
         this.deviceInfo = deviceInfo
         this.eventID = eventID
     }
 
-    override fun toString(): String {
-        return "TalkEvent(deviceInfo=$deviceInfo, eventID=$eventID)"
+    constructor(deviceInfo: DeviceInfo?, eventID: Int, callType: Int) {
+        this.deviceInfo = deviceInfo
+        this.eventID = eventID
+        this.callType = callType
     }
+
+    override fun toString(): String {
+        return "TalkEvent(deviceInfo=$deviceInfo, eventID=$eventID, callType=$callType)"
+    }
+
 
 }
 
