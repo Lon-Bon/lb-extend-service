@@ -63,9 +63,9 @@ interface SystemSettingService {
 
 
     /**
-     * 获取设备ip
+     * 获取默认网卡以太网IP
      */
-    fun getDefaultEthernetIP(): String
+    fun getDefaultIFaceEthernetIp(): String
 
 
     /**
@@ -79,11 +79,6 @@ interface SystemSettingService {
      */
     fun getDefaultEthernetGateWay(): String
 
-
-    /**
-     * 获取默认网卡以太网IP
-     */
-    fun getDefaultIFace(): String
 
 
     /**
