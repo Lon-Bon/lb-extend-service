@@ -80,7 +80,6 @@ interface SystemSettingService {
     fun getDefaultEthernetGateWay(): String
 
 
-
     /**
      * 设置以太网信息
      * ethernetIP: 设备ip
@@ -88,6 +87,15 @@ interface SystemSettingService {
      * ethernetGateWay： 网关
      */
     fun setEthernetInfo(ethernetIP: String?, ethernetNetMask: String?, ethernetGateWay: String?)
+
+
+    /**
+     * 定时开关机 测试
+     * @param mode   0/1   关机/开机
+     * @param ena   0/1    否/是 开启该功能
+     * @param time  18:30  时间
+     */
+    fun powerOnOrOff(mode: Int, ena: Int, time: String)
 
 
 }
