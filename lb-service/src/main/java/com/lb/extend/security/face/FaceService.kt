@@ -152,7 +152,13 @@ const val MSG_CODE_SDK_BUSY = 2 //人脸SDK正在进行其他操作，图片录�
 
 
 data class CommonFaceResult(val code: String, val msgCode: Int)
-data class CompareResult(val code: String, val verifyState: Int, val msgCode: Int)
+data class CompareResult(
+    val code: String,
+    val verifyState: Int,
+    val msgCode: Int,
+    val jpegByte: ByteArray? = null
+)
+
 data class EnrollResult(val code: String, val msgCode: Int, val imgPathList: String)
 data class EnrollImgBatchResult(val SuccessCodes: List<String>, val msgCode: Int)
 data class RectBean(val left: Int, val top: Int, val right: Int, val bottom: Int)

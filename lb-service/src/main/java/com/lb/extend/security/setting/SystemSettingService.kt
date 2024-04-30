@@ -1,6 +1,7 @@
 package com.lb.extend.security.setting
 
 import com.zclever.ipc.annotation.BindImpl
+import com.zclever.ipc.core.Result
 
 @BindImpl("com.lonbon.setting_provider.SystemSettingImpl")
 interface SystemSettingService {
@@ -90,7 +91,7 @@ interface SystemSettingService {
 
 
     /**
-     * 定时开关机 测试
+     * 定时开关机
      * @param mode   0/1   关机/开机
      * @param ena   0/1    否/是 开启该功能
      * @param time  18:30  时间
@@ -98,4 +99,28 @@ interface SystemSettingService {
     fun powerOnOrOff(mode: Int, ena: Int, time: String)
 
 
+    /**
+     * Get power on or off config 获取设备开关机信息
+     *
+     * @param dataCallBack
+     */
+    fun getPowerOnOrOffConfig(dataCallBack: Result<PowerOnOrOffConfig>)
+
+
 }
+
+/**
+ * Power on or off config  定时开关机数据
+ *
+ * @property powerOnSwitch  是否设置开机时间
+ * @property powerOnTime   开机时间
+ * @property powerOffSwitch  是否设置关机时间
+ * @property powerOffTime   关机时间
+ * @constructor Create empty Power on or off config
+ */
+data class PowerOnOrOffConfig(
+    val powerOnSwitch: Boolean,
+    val powerOnTime: String,
+    val powerOffSwitch: Boolean,
+    val powerOffTime: String,
+)
