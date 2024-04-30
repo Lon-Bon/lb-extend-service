@@ -268,7 +268,7 @@ interface IntercomService {
      * @param width Int
      * @param height Int
      */
-    fun setViewWidthHeight(width:Int,height:Int)
+    fun setViewWidthHeight(width: Int, height: Int)
 
     /**
      * 对讲终端人员信息回调接口
@@ -282,21 +282,21 @@ interface IntercomService {
      * @param path String
      * @param callBack Result<String>
      */
-    fun setRecordPath(path:String,callBack: Result<String>)
+    fun setRecordPath(path: String, callBack: Result<String>)
 
     /**
      * 获取路径下的文件
      * @param path String
      * @param callBack Result<ArrayList<File>>
      */
-    fun getFileList(path:String,callBack: Result<ArrayList<File>>)
+    fun getFileList(path: String, callBack: Result<ArrayList<File>>)
 
     /**
      * 删除文件
      * @param path String
      * @param callBack Result<Boolean>
      */
-    fun deleteFile(path:String,callBack: Result<Boolean>)
+    fun deleteFile(path: String, callBack: Result<Boolean>)
 
     /**
      * 隐藏和显示对讲视频框
@@ -321,6 +321,22 @@ interface IntercomService {
      * 获取下级主机描述信息
      */
     fun getSubMasterList(callBack: Result<ArrayList<MasterDeviceInfo>>): Int
+
+    /**
+     * 开始/停止录音，调用后存储录音文件
+     *
+     * @param start 开始/停止录音 true开始 false停止
+     * @param filePath 录音文件绝对路径名
+     */
+    fun mediaStartRecord(start: Boolean, filePath: String): Int
+
+
+    /**
+     * 设置对讲io事件回调
+     * eg: 物理按键呼叫、物理按键报警（这里只是用来处理物理按键的回调）
+     */
+    fun setOnIntercomIOCallBack(callBack: Result<Int>?)
+
 }
 
 
@@ -428,16 +444,28 @@ class TalkEvent {
     var deviceInfo: DeviceInfo? = null
     var eventID: Int = 0
 
+    //呼叫类型
+    var callType: Int = 0
+
     constructor(deviceInfo: DeviceInfo?, eventID: Int) {
         this.deviceInfo = deviceInfo
         this.eventID = eventID
     }
 
-    override fun toString(): String {
-        return "TalkEvent(deviceInfo=$deviceInfo, eventID=$eventID)"
+    constructor(deviceInfo: DeviceInfo?, eventID: Int, callType: Int) {
+        this.deviceInfo = deviceInfo
+        this.eventID = eventID
+        this.callType = callType
+
     }
 
+    override fun toString(): String {
+        return "TalkEvent(deviceInfo=$deviceInfo, eventID=$eventID, callType=$callType)"
+    }
+
+
 }
+
 class GeneralUDPBean {
     var action: String? = null
     var interCmd: String? = null
@@ -448,13 +476,14 @@ class GeneralUDPBean {
     var displayNum: String? = null
     var areaID: String? = null
     var BranchCode: String? = null
-    var PersonType :String? = null
+    var PersonType: String? = null
     var RoomNum: String? = null
 
     override fun toString(): String {
         return "GeneralUDPBean(action=$action, interCmd=$interCmd, slaveCode=$slaveCode, name=$name, code=$code, event=$event, displayNum=$displayNum, areaID=$areaID, BranchCode=$BranchCode, PersonType=$PersonType, RoomNum=$RoomNum)"
     }
 }
+
 /**
  * 主机设备信息
  *
@@ -465,7 +494,7 @@ class GeneralUDPBean {
  */
 class MasterDeviceInfo {
     var areaID: Int = 0
-    var displayNum: Int=0
+    var displayNum: Int = 0
     var devRegType: Int = 0
     var description: String? = null
     override fun toString(): String {
@@ -474,3 +503,8 @@ class MasterDeviceInfo {
 
 
 }
+
+
+
+
+

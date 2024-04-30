@@ -5,13 +5,13 @@ plugins {
     id 'com.github.dcendents.android-maven'
 }
 
-properties.put("MAVEN_REPO_TYPE","REMOT")
+//properties.put("MAVEN_REPO_TYPE","REMOT")
+//
+//group = PUBLISH_GROUP
 
-group = PUBLISH_GROUP
-
-version = PUBLISH_VERSION
-
-apply from: '../gradle/publish_aar.gradle'
+//version = PUBLISH_VERSION
+//
+//apply from: '../gradle/publish_aar.gradle'
 
 android {
     compileSdkVersion 30
@@ -44,8 +44,9 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api 'com.github.zhanggaoming.android-ipc:ipc-core:3.1.2'
-    kapt 'com.github.zhanggaoming.android-ipc:ipc-compiler:3.1.2'
+    implementation 'com.google.code.gson:gson:2.8.7'
+    api 'com.github.zhanggaoming.android-ipc:ipc-core:v3.1.3'
+    kapt 'com.github.zhanggaoming.android-ipc:ipc-compiler:v3.1.3'
 }
 
 
