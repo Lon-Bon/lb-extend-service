@@ -57,6 +57,11 @@ interface FaceService {
     fun startCompareWithParams(openPreview: Boolean)
 
     /**
+     * 配置无界面人预览框
+     */
+    fun configFacePreview(left: Int, top: Int, width: Int, height: Int, hide: Boolean)
+
+    /**
      * 获取已录入人脸编号列表
      */
     fun getFaceCodesList();
