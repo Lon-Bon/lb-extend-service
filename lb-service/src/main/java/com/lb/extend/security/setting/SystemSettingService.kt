@@ -107,6 +107,13 @@ interface SystemSettingService {
     fun getPowerOnOrOffConfig(dataCallBack: Result<PowerOnOrOffConfig>)
 
 
+    /**
+     *水印控制开关
+     * @param oSDEnable  true:打开水印  false:关闭水印
+     */
+    fun setMainCameraOSDEnable(oSDEnable: Boolean)
+
+
 }
 
 /**
