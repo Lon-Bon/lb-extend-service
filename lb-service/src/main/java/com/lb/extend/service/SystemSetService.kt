@@ -68,5 +68,10 @@ interface SystemSetService {
      * 同步系统时间
      * */
     fun updateSystemTime(newTime: Long)
+
+    /**
+     * 开启 wifi true 为开，false为关
+     * **/
+    fun openWifi(key:Boolean)
 }
 
