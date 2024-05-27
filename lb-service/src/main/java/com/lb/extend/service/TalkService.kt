@@ -33,6 +33,11 @@ interface TalkService {
      * 设置事件回调
      * **/
     fun setEventCallBack(callBack : Result<TalkServiceEvent>)
+
+    /**
+     * 接听
+     * **/
+    fun  answer()
 }
 
 
