@@ -16,6 +16,8 @@ enum class CallState{
     CALL_FAILED,
     CALL_TALKING_END,
     CALL_IN,
-    CALL_OFFLINE
+    CALL_OFFLINE,
+    CALL_BUSY,
+    CALL_REFUSE,
 
 }
