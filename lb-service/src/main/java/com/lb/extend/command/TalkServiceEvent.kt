@@ -10,14 +10,16 @@ package com.lb.extend.command
 data class TalkServiceEvent(val event:String,val eventId:Int)
 
 enum class CallState{
-    CALL_PROCESSING,
-    CALL_RING_BACK,
-    CALL_TALKING_START,
-    CALL_FAILED,
-    CALL_TALKING_END,
-    CALL_IN,
+    CALL_PROCESSING,//1
+    CALL_RING_BACK,//2
+    CALL_MONITOR_TALKING_START,//3
+    CALL_TALKING_START,//4
+    CALL_TALKING_END,//5
+    CALL_REFUSE,//6
+    CALL_BUSY,//7
+    CALL_FAILED,//8
+    CALL_TIME_OUT,//9
+    CALL_IN,//10
     CALL_OFFLINE,
-    CALL_BUSY,
-    CALL_REFUSE,
 
 }
