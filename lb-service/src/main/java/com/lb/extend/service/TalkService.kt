@@ -70,15 +70,15 @@ interface TalkService {
     fun setRemoteViewPosition(left: Int, top: Int, width: Int, height: Int)
 
     /**
-     * 隐藏本地视频画面
+     * 显示本地视频画面
      * */
-    fun hideLocalView()
+    fun showLocalView(key:Boolean)
 
 
     /**
-     * 隐藏对方视频画面
+     * 显示对方视频画面
      * */
-    fun hideRemoteView()
+    fun showRemoteView(key:Boolean)
 
     /**
      * 设置本地视频画面全屏，true 全屏，false 取消全屏
