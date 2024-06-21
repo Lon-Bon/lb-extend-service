@@ -21,5 +21,7 @@ enum class CallState{
     CALL_TIME_OUT,//9
     CALL_IN,//10
     CALL_OFFLINE,
+    CALL_ENTER_NURSE_STATE,//240
+    CALL_EXIT_NURSE_STATE//241
 
 }
