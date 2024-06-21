@@ -96,6 +96,8 @@ interface TalkService {
 
     fun enterDoorMachineNursingState()
 
+    fun exitDoorMachineNursingState()
+
 }
 
 
