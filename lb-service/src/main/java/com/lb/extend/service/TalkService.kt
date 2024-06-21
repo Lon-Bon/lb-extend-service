@@ -96,6 +96,10 @@ interface TalkService {
 
     fun enterDoorMachineNursingState()
 
+    /**
+     * 门口机退出护理状态
+     * */
+
     fun exitDoorMachineNursingState()
 
 }
