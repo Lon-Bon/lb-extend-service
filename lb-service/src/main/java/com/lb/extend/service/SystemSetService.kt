@@ -73,5 +73,10 @@ interface SystemSetService {
      * 开启 wifi true 为开，false为关
      * **/
     fun openWifi(key:Boolean)
+
+    /**
+     * 门口机进入护理状态
+     * */
+    fun enterDoorMachineNursingState()
 }
 
