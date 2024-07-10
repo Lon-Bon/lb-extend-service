@@ -74,6 +74,14 @@ interface SystemSetService {
      * **/
     fun openWifi(key:Boolean)
 
+    /**
+     * 进入设置
+     * **/
+    fun intoSetting()
 
+    /**
+     * 退出设置
+     * **/
+    fun backSetting()
 }
 
