@@ -115,6 +115,14 @@ interface SystemSettingService {
     fun setMainCameraOSDEnable(oSDEnable: Boolean)
 
 
+    /**
+     * 升级第三方厂商的lonbon文件
+     * @param lbFilePath  LB升级包文件
+     * @param extras  后续可扩展一些配置，不需要就传 null
+     */
+    fun upgradeThirdPartyLBPackage(lbFilePath: String, vararg extras: String?)
+
+
 }
 
 /**
