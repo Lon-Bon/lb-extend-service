@@ -117,6 +117,6 @@ interface SystemSetService {
     /**
      * 获取设备信息参数
      */
-    fun setDeviceParamsCallBack(callBack : DeviceParams)
+    fun setDeviceParamsCallBack(callBack : Result<DeviceParams>)
 }
 
