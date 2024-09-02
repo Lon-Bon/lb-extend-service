@@ -1,7 +1,7 @@
 package com.lb.extend.service
 
-import android.graphics.Bitmap
 import com.lb.extend.command.LonbonEvent
+import com.lb.extend.command.DeviceParams
 import com.zclever.ipc.annotation.BindImpl
 
 import com.zclever.ipc.core.Result
@@ -83,5 +83,40 @@ interface SystemSetService {
      * 退出设置
      * **/
     fun backSetting()
+
+    /**
+     * 设置音量
+     * */
+    fun setVolume(streamType: Int,volume: Int)
+
+    /**
+     * 设置亮度
+     * */
+    fun setBrightness(brightness: Int)
+
+    /**
+     * 设置静态网络(ip,网关,子网掩码,DNS)
+     * */
+    fun setEthernetConfig(ip: String,gateway: String,netmask: String,dns: String)
+
+    /**
+     * 获取静态网络配置
+     * */
+    fun getEthernetConfig()
+
+    /**
+     * 获取设备mac
+     * */
+    fun getMac()
+
+    /**
+     * 获取存储/内存/CPU使用率参数
+     * */
+    fun getDeviceParams()
+
+    /**
+     * 获取设备信息参数
+     */
+    fun setDeviceParamsCallBack(callBack : DeviceParams)
 }
 
