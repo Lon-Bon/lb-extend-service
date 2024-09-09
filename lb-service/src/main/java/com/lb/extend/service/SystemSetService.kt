@@ -118,5 +118,10 @@ interface SystemSetService {
      * 获取设备信息参数
      */
     fun setDeviceParamsCallBack(callBack : Result<DeviceParams>)
+
+    /**
+     * 设置设备dpi参数
+     */
+    fun setDeviceDensity(density: Int)
 }
 
