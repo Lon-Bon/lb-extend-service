@@ -123,5 +123,7 @@ interface SystemSetService {
      * 设置设备dpi参数
      */
     fun setDeviceDensity(density: Int)
+
+    //2024.09.30测试
 }
 
