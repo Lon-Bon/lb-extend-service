@@ -5,8 +5,8 @@ import com.zclever.ipc.annotation.BindImpl
 /**
  * 广州高新兴接口定制
  */
-@BindImpl("com.lonbon.setting_provider.SystemApiForGxx")
-interface SystemApiForGxx {
+@BindImpl("com.lonbon.setting_provider.GxxSystemSettingImpl")
+interface GxxSystemSettingService {
 
     /**
      * 查询监室内屏（分机）及主机设备信息
