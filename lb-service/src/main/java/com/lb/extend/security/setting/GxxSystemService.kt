@@ -1,30 +1,37 @@
-package com.lb.extend.security.gxgxx
+package com.lb.extend.security.setting
 
 import com.zclever.ipc.annotation.BindImpl
+import com.zclever.ipc.core.Result
 
 /**
- * 广州高新兴接口定制
+ * 广州高新兴基础设置接口
  */
-@BindImpl("com.lonbon.setting_provider.GxxSystemSettingImpl")
+@BindImpl("com.lonbon.setting_provider.GxxSystemSettingServiceImpl")
 interface GxxSystemSettingService {
 
     /**
      * 查询监室内屏（分机）及主机设备信息
      * @return  返回系统基本信息
      */
-    fun getDevInfo(): GSysDevInfo?
+    fun getDevInfo(callBack: Result<GxxSysDevInfo>)
 
     /**
      * 查询监室内屏运行状态
      * @return 硬件运行信息
      */
-    fun getHardware(): GHardwareInfo?
+    fun getHardware(callBack: Result<GxxHardwareInfo>)
 
     /**
      * 修改设备IP/配置以太网
      * @return 返回设置状态 0:成功，1失败
      */
-    fun setSysNetConfig(info: GNetWorkInfo): Int
+    fun setSysNetConfig(
+        staticEnable: Boolean,    //是否使用静态IP 当为true,以上参数必填
+        ethip: String,  //设备IP
+        ethNetmask: String,//掩码
+        ethGateWay: String, //网关
+        dnsservers: Array<String>//DSN服务器
+    ): Int
 
 
     /**
@@ -60,14 +67,6 @@ interface GxxSystemSettingService {
      */
     fun install(appPath: String): Int
 
-    /**
-     * 文本语音播报接口
-     * @param language 语言
-     * @param rate 速率
-     * @param text 文本内容，不能超过4000字符
-     * @return 0 成功，1 失败
-     */
-    fun startTextToSpeech(language: String, rate: Int, text: String): Int
 
     /**
      * 设置音量
@@ -93,3 +92,27 @@ interface GxxSystemSettingService {
 
 
 }
+
+
+data class GxxHardwareInfo(
+    var cpuModel: String,//Cpu型号
+    var cpuRate: String, //cpu 使用率/总频率
+    var cpuNum: String, //Cpu核数
+    var memory: String, //运行内存 已使用/总内存
+    var storage: String, //存储空间 已使用/总内存
+)
+
+
+/**
+ * 广州高新兴 数据实体类包装
+ */
+
+data class GxxSysDevInfo(
+    var ethip: String,//设备IP
+    var ethNetmask: String, //掩码
+    var ethGateWay: String, //网关
+    var dnsservers: Array<String>, //DSN服务器
+    var staticEnable: Boolean, //是否使用静态IP
+    var name: String = "",//设备名
+    var serial: String = "" //序列号，唯一
+)
