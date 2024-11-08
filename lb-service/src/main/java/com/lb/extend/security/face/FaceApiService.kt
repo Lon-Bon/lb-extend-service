@@ -22,11 +22,10 @@ interface FaceApiService {
     /**
      * 人脸检测
      * 用于检测指定图像中的人脸位置等信息
-     * @param faceArr 人脸信息列表，用于装载人脸信息的返回,详见FaceTracked
-     * @param szImgBuf nv21 格式的图像
-     * @param nWidth 图像的宽度
-     * @param nHeight 图像的高度
-     * @param nNumThreads 运行该算法调用的线程数量（在合 理范围内， 数值越大则 cpu 占用越 高，速度越快）
+     * @param frame 人脸信息列表，用于装载人脸信息的返回,详见FaceTracked
+     * @param frameWidth 图像的宽度
+     * @param frameHeight 图像的高度
+     * @param mode 运行该算法调用的线程数量（在合 理范围内， 数值越大则 cpu 占用越 高，速度越快）
      * @return 人脸检测状态码
      *
      */
@@ -35,7 +34,7 @@ interface FaceApiService {
         frameWidth: Int,
         frameHeight: Int,
         mode: DetectMode
-    )
+    ):FaceDetectInfo
 
     /**
      * 检测活体支持
@@ -106,5 +105,19 @@ enum class DetectMode {
     DEFAULT,//默认检测
     ENROLL_DETECT,//录入检测
     RECOGNIZE_DETECT//识别检测
+
+}
+/**
+ * 人脸节点信息，主要是检测人脸返回的信息
+ */
+data class FaceDetectInfo internal constructor(val faceDetectDetails: MutableList<FaceDetectDetail>, val param: Any? = null) {
+
+}
+
+/**
+ * 人脸检测的详细信息
+ */
+data class FaceDetectDetail internal constructor(val faceRect: Rect, val param: Any? = null) {
+
 
 }
