@@ -18,7 +18,35 @@ import com.zclever.ipc.annotation.BindImpl
  */
 @BindImpl("com.lonbon.face_provider.FaceApiServiceImpl")
 interface FaceApiService {
+    /**
+     * 打开人脸识别
+     * 启动人脸识别，用于初始化该软件的进程资源，建议在进程开始时使用。
+     * @param licensePath 授权文件
+     * @param result 初始化状态码
+     * @return result 初始化
+     */
+    fun init(licensePath: String? = null): Int
 
+    /**
+     * 关闭人脸识别，用于释放该软件的进程资源， 建议在进程结束时使用
+     * @return result 人脸引擎释放状态码
+     */
+    fun cleanUp(): Int
+
+    /**
+     * 创建人脸识别器实例函数
+     *只有成功创建并获得实例 handle 后才进行人脸检测、特征提取、活体检测、库管理等功能
+     * @param szModelPath 模型所在文件夹的路径
+     * @return result 创建状态码
+     */
+    fun create(szModelPath: String? = null): Int
+
+    /**
+     * 销毁人脸识别器实例函数
+     * 销毁人脸识别器实例函数
+     * @return result 销毁状态码
+     */
+    fun release(): Int
     /**
      * 人脸检测
      * 用于检测指定图像中的人脸位置等信息
@@ -75,6 +103,21 @@ interface FaceApiService {
      * 用于一次性加载整个注册库
      */
     fun importFace(faceFeature: String, uniqueCode: String): Boolean = false
+
+    /**
+     * 新增人脸
+     * 新增人脸到库
+     * @return  result 导入单个人脸状态码
+     */
+    fun addPerson(faceFeature: String, uniqueCode: String): Boolean = false
+
+    /**
+     * 更新指定人员特征
+     * 用于更新指定人员特征。
+     * @param person   根据 id 更新对应人员的特征
+     * @return  result 人脸数据更新状态码
+     */
+    fun updatePersonFeature(faceFeature: String, uniqueCode: String): Boolean = false
 
     /**
      * 清空人员注册库
