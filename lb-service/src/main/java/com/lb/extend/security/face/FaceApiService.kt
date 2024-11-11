@@ -150,17 +150,21 @@ enum class DetectMode {
     RECOGNIZE_DETECT//识别检测
 
 }
+
 /**
  * 人脸节点信息，主要是检测人脸返回的信息
  */
-data class FaceDetectInfo (val faceDetectDetails: MutableList<FaceDetectDetail>, val param: Any? = null) {
+data class FaceDetectInfo(
+    val faceDetectDetails: MutableList<FaceDetectDetail>,
+    val param: Any? = null
+) {
 
 }
 
 /**
  * 人脸检测的详细信息
  */
-data class FaceDetectDetail (val faceRect: Rect, val param: Any? = null) {
+data class FaceDetectDetail(val faceRect: Rect, val param: Any? = null) {
 
 
 }
