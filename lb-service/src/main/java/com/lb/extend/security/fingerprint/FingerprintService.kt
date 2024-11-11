@@ -80,6 +80,25 @@ interface FingerprintService {
      */
     fun clearAllFingerprint()
 
+    /**
+     * 根据本地指纹图片注册指纹
+     * 传入一张指纹图片路径，注册指纹
+     * @param path 指纹路径
+     * @param feature 指纹特征值提取返回结果，直接传new byte[512]
+     * @return  0 成功，1 设备未打开，2 提取失败，3其他
+     */
+    fun autoRegisterFromFile(path: String, feature: ByteArray): Int
+
+    /**
+     * 指纹1：1比对接口
+     * 指纹识别
+     * @param path1 指纹1路径
+     * @param path2 指纹2路径
+     * @param similarity 相似度
+     * @return 0 成功，1 设备未打开，2 未注册，3识别失败
+     */
+    fun fringerCompare(path1: String, path2: String, similarity: IntArray): Int
+
 }
 
 /**
