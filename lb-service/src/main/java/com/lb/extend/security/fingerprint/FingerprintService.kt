@@ -111,7 +111,7 @@ interface FingerprintService {
      * @param similarity 相似度
      * @return 0 成功，1 设备未打开，2 未注册，3识别失败
      */
-    fun fringerCompare(path1: String, path2: String, similarity: IntArray): Float
+    fun fringerCompare(path1: String, path2: String, similarity: FloatArray): Float
 
     /**
      * 回调指纹1：1比对接口
@@ -123,11 +123,11 @@ interface FingerprintService {
      *  用于监测指纹是否按压
      *  @return 0未按压指纹，1设备未打开，2检测到指纹按压
      */
-    fun  isFingerPress():Int
+    fun  isFingerPress():Boolean
     /**
      * 回调指纹1：1比对接口
      */
-    fun onIsFingerPress(callBack: Result<Int>)
+    fun onIsFingerPress(callBack: Result<Boolean>)
 }
 
 /**
@@ -136,16 +136,18 @@ interface FingerprintService {
  * @property feature String 指纹特征值
  * @constructor
  */
-data class FingerprintFeatureResult(val id: String, val feature: String)
+data class FingerprintFeatureResult(val id: String, val feature: String, val fingerprintBase64Str: String?)
 
 /**
  * 指纹录入剩余未采集指纹数量的回调结果
  * @property leftCounts Int 差几个指纹没录入（如果leftCounts为0，则会回调FingerprintFeatureResult）
+ * @property feature String 指纹特征值
  * @property fingerprintBase64Str String? 当前录入指纹的图片的base64的字符串（暂未支持）
  * @constructor
  */
 data class FingerprintLeftNumResult(
     val leftCounts: Int,
+    val feature: String,
     val fingerprintBase64Str: String?
 )
 
