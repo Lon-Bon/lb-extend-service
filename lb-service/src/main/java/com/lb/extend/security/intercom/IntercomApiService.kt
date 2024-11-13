@@ -8,8 +8,8 @@ import com.zclever.ipc.core.Result
 /**
  * 高新兴对讲相关接口
  */
-@BindImpl("com.lonbon.intercom_provider.GxxIntercomServiceImpl")
-interface GxxIntercomService {
+@BindImpl("com.lonbon.intercom_provider.IntercomServiceApiImpl")
+interface IntercomApiService {
 
 
     /**

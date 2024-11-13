@@ -6,8 +6,8 @@ import com.zclever.ipc.core.Result
 /**
  * 广州高新兴基础设置接口
  */
-@BindImpl("com.lonbon.setting_provider.GxxSystemSettingServiceImpl")
-interface GxxSystemSettingService {
+@BindImpl("com.lonbon.setting_provider.SystemSettingApiImpl")
+interface SystemSettingApiService {
 
     /**
      * 查询监室内屏（分机）及主机设备信息
@@ -57,7 +57,7 @@ interface GxxSystemSettingService {
      * @return 返回设置状态 0:成功，1失败
      *
      */
-    fun appRestart(packageName: String): Int
+    fun appRestart(packageName: String)
 
     /**
      * 升级APP
