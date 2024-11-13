@@ -87,13 +87,26 @@ interface IntercomApiService {
     fun requestVideo(request: Boolean)
 
 
+    /**
+     * 设置通话视频流回调
+     */
     fun setNV21DataListener(callBack: Result<VideoStreamData>)
+
+
+    /**
+     * 请求摄像头流
+     */
+    fun requestCamera(callBack: Result<VideoStreamData>?, requestResult: Result<Int>)
 
 
 }
 
 
-data class VideoStreamData(val byteArray: ByteArray? = null, val width: Int = 0, val height: Int = 0) {
+data class VideoStreamData(
+    val byteArray: ByteArray? = null,
+    val width: Int = 0,
+    val height: Int = 0
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
