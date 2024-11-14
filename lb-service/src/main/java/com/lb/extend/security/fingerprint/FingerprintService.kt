@@ -85,7 +85,7 @@ interface FingerprintService {
      * @param feature 根据图片数据生成的指纹特征结果
      * @return 0成功，1设备未打开，2生成失败
      */
-    fun fingerFeatureCreat(img: ByteArray, feature: ByteArray): ByteArray?
+    fun fingerFeatureCreat(img: ByteArray, feature: ByteArray)
 
     /**
      * 回调指纹特征值创建
@@ -98,7 +98,7 @@ interface FingerprintService {
      * @param feature 指纹特征值提取返回结果，直接传new byte[512]
      * @return  0 成功，1 设备未打开，2 提取失败，3其他
      */
-    fun autoRegisterFromFile(path: String, feature: ByteArray): ByteArray?
+    fun autoRegisterFromFile(path: String, feature: ByteArray)
     /**
      * 回调图片注册指纹
      */
@@ -111,7 +111,7 @@ interface FingerprintService {
      * @param similarity 相似度
      * @return 0 成功，1 设备未打开，2 未注册，3识别失败
      */
-    fun fringerCompare(path1: String, path2: String, similarity: FloatArray): Float
+    fun fringerCompare(path1: String, path2: String, similarity: FloatArray)
 
     /**
      * 回调指纹1：1比对接口
@@ -123,7 +123,7 @@ interface FingerprintService {
      *  用于监测指纹是否按压
      *  @return 0未按压指纹，1设备未打开，2检测到指纹按压
      */
-    fun  isFingerPress():Boolean
+    fun  isFingerPress()
     /**
      * 回调指纹1：1比对接口
      */
