@@ -96,7 +96,7 @@ interface IntercomApiService {
     /**
      * 请求摄像头流
      */
-    fun requestCamera(callBack: Result<VideoStreamData>?, requestResult: Result<Int>)
+    fun requestLocalCamera(callBack: Result<VideoStreamData>?)
 
 
 }
@@ -107,6 +107,10 @@ data class VideoStreamData(
     val width: Int = 0,
     val height: Int = 0
 ) {
+
+    //0:初始化成功  1：初始化失败 2：返回流
+    var result = 0
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
