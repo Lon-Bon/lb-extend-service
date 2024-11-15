@@ -2,6 +2,7 @@ package com.lb.extend.security.face
 
 import android.graphics.Rect
 import com.zclever.ipc.annotation.BindImpl
+import com.zclever.ipc.core.Result
 
 /**
  * *****************************************************************************
@@ -137,6 +138,44 @@ interface FaceApiService {
      */
     fun searchFace(searchFeature: String, threshold: Float): List<FaceSearchResult> =
         mutableListOf()
+
+
+    /**
+     * 回调人脸特征值
+     */
+    fun onFaceFeature(callBack: Result<List<FaceDetail>>)
+
+    /**
+     * 回调检测活体支持
+     */
+    fun onAntiSpoofingProcess(callBack: Result<Float>)
+
+    /**
+     * 回调人脸检测
+     */
+    fun onFaceDetect(callBack: Result<FaceDetectInfo>)
+
+    /**
+     * 比较两个人脸特征值
+     */
+    fun onCompareFaceFeature(callBack: Result<Float>)
+
+    /**
+     * 回调注册人脸
+     */
+    fun onImportFace(callBack: Result<Boolean>)
+
+    /**
+     * 回调搜索人脸信息
+     */
+    fun onSearchFace(callBack: Result<List<FaceSearchResult>>)
+
+    /**
+     * 回调删除人脸
+     */
+    fun onDeletePerson(callBack: Result<Boolean>)
+
+
 }
 
 
@@ -155,7 +194,7 @@ enum class DetectMode {
  * 人脸节点信息，主要是检测人脸返回的信息
  */
 data class FaceDetectInfo(
-    val faceDetectDetails: MutableList<FaceDetectDetail>,
+    val faceDetectDetails: List<FaceDetectDetail> = mutableListOf(),
     val param: Any? = null
 ) {
 
