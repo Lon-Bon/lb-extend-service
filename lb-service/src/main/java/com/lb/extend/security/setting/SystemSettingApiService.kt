@@ -57,7 +57,7 @@ interface SystemSettingApiService {
      * @return 返回设置状态 0:成功，1失败
      *
      */
-    fun appRestart(packageName: String)
+    fun appRestart(packageName: String): Boolean
 
     /**
      * 升级APP

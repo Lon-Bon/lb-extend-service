@@ -13,6 +13,12 @@ interface IntercomApiService {
 
 
     /**
+     * 自定义一些设置
+     */
+    fun init()
+
+
+    /**
      * 文本语音播报接口
      * @param language 语言
      * @param rate 速率
