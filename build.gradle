@@ -7,6 +7,16 @@ buildscript {
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://www.jitpack.io' }
+        // Lonbon远程仓库
+        maven {
+            url 'http://voip.lonbon.com:8092/repository/maven-releases/'
+            allowInsecureProtocol true
+        }
+
+        maven {
+            url 'http://voip.lonbon.com:8092/repository/maven-snapshots/'
+            allowInsecureProtocol true
+        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.3"
@@ -24,6 +34,16 @@ allprojects {
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'https://www.jitpack.io' }
+        // Lonbon远程仓库
+        maven {
+            url 'http://voip.lonbon.com:8092/repository/maven-releases/'
+            allowInsecureProtocol true
+        }
+
+        maven {
+            url 'http://voip.lonbon.com:8092/repository/maven-snapshots/'
+            allowInsecureProtocol true
+        }
     }
 }
 
