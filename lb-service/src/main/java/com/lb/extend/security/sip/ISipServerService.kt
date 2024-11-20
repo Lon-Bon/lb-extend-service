@@ -81,7 +81,7 @@ interface ISipServerService {
 
 }
 
-class SipEvent{
+class SipEvent {
     var eventId = 0 //事件Id
 
     var accountId = -1 //自身的sipAccountId;
@@ -90,7 +90,7 @@ class SipEvent{
     var callId = -1 //自身的callIdId;
 
 
-    var mParam2:String? = null //  sipAccount
+    var mParam2: String? = null //  sipAccount
 
     var account: String? = null //  账户
 
@@ -106,8 +106,23 @@ class SipEvent{
 
     var isSupportVideo = true //是否支持视频
 
+    /**
+     * 定制需求需要用到  1：呼叫  2：报警
+     */
+    var type = ""   // "alarm"  "call"
+    var status = 1 //呼叫状态 1:连接中 2：通话中 3：挂断
+    var msg = ""  //错误信息
+    var isCallButtonClick = true //是否是物理按键操作的呼叫或者报警
+
+
     override fun toString(): String {
-        return "SipEventBean(eventId=$eventId, accountId=$accountId, mParam2='$mParam2', callId=$callId, account=$account, otherAccount=$otherAccount, isActive=$isActive, roomDescribe='$roomDescribe', initiator='$initiator')"
+        return "SipEvent(eventId=$eventId, accountId=$accountId, " +
+                "callId=$callId, mParam2=$mParam2, account=$account," +
+                " otherAccount=$otherAccount, isActive=$isActive," +
+                " roomDescribe='$roomDescribe', initiator='$initiator'," +
+                " dataType=$dataType, isSupportVideo=$isSupportVideo, " +
+                "type='$type', status=$status, msg='$msg'," +
+                " isCallButtonClick=$isCallButtonClick)"
     }
 
 

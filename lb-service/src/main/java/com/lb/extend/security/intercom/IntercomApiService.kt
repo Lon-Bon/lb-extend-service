@@ -1,6 +1,7 @@
 package com.lb.extend.security.intercom
 
 import com.lb.extend.common.CallbackData
+import com.lb.extend.security.sip.SipEvent
 import com.lb.extend.security.temperature.TemperatureData
 import com.zclever.ipc.annotation.BindImpl
 import com.zclever.ipc.core.Result
@@ -10,12 +11,6 @@ import com.zclever.ipc.core.Result
  */
 @BindImpl("com.lonbon.intercom_provider.IntercomServiceApiImpl")
 interface IntercomApiService {
-
-
-    /**
-     * 自定义一些设置
-     */
-    fun init()
 
 
     /**
@@ -63,22 +58,16 @@ interface IntercomApiService {
 
 
     /**
-     * 监测或响应 报警/呼叫物理按键
+     * 监听sip对讲
      */
-    fun setOnIntercomIOCallBack(callBack: Result<Int>?)
-
-
-    /**
-     * 设置对讲事件的监听事件，比如呼出、呼入、报警、防拆报警等等
-     */
-    fun talkEventCallback(callBack: Result<TalkEvent>)
+    fun onSipEvent(callBack: Result<SipEvent>?)
 
 
     /**
      * “alarm”:报警
      * “call”:呼叫
      */
-    fun startCall(callType: String)
+    fun startCall(callType: String, tCode: String)
 
 
     /**
@@ -96,7 +85,7 @@ interface IntercomApiService {
     /**
      * 设置通话视频流回调
      */
-    fun setNV21DataListener(callBack: Result<VideoStreamData>)
+    fun setNV21DataListener(callBack: Result<VideoStreamData>?)
 
 
     /**
@@ -107,6 +96,13 @@ interface IntercomApiService {
 
 }
 
+
+/**
+ * type:呼叫类型  "call:"呼叫 “alarm”:报警
+ * status:呼叫状态  1:连接中   2：通话中  3：挂断
+ * msg: 错误信息
+ */
+data class SipCallEvent(val type: String, val status: Int, val msg: String = "")
 
 data class VideoStreamData(
     val byteArray: ByteArray? = null,
