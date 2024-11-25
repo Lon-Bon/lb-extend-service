@@ -1,6 +1,8 @@
 package com.lb.extend.security.face
 
 import android.graphics.Rect
+import android.os.ParcelFileDescriptor
+import com.zclever.ipc.annotation.BigData
 import com.zclever.ipc.annotation.BindImpl
 import com.zclever.ipc.core.Result
 
@@ -48,6 +50,7 @@ interface FaceApiService {
      * @return result 销毁状态码
      */
     fun release(): Int
+
     /**
      * 人脸检测
      * 用于检测指定图像中的人脸位置等信息
@@ -59,11 +62,15 @@ interface FaceApiService {
      *
      */
     fun faceDetect(
+        @BigData
         frame: ByteArray,
         frameWidth: Int,
         frameHeight: Int,
         mode: DetectMode
-    ):FaceDetectInfo
+    ): FaceDetectInfo
+
+
+
 
     /**
      * 检测活体支持
@@ -74,6 +81,7 @@ interface FaceApiService {
      * @param faceRect 帧图像里面的人脸区域
      */
     fun antiSpoofingProcess(
+        @BigData
         frame: ByteArray,
         width: Int,
         height: Int,
@@ -88,6 +96,7 @@ interface FaceApiService {
      *
      */
     fun getFaceFeature(
+        @BigData
         frame: ByteArray,
         width: Int,
         height: Int
@@ -174,6 +183,7 @@ interface FaceApiService {
      * 回调删除人脸
      */
     fun onDeletePerson(callBack: Result<Boolean>)
+
 
 
 }
