@@ -1,7 +1,6 @@
 package com.lb.extend.security.face
 
 import android.graphics.Rect
-import android.os.ParcelFileDescriptor
 import com.zclever.ipc.annotation.BigData
 import com.zclever.ipc.annotation.BindImpl
 import com.zclever.ipc.core.Result
@@ -67,7 +66,7 @@ interface FaceApiService {
         frameWidth: Int,
         frameHeight: Int,
         mode: DetectMode
-    ): FaceDetectInfo
+    ):List<FaceDetectDetail?> = mutableListOf()
 
 
 
@@ -162,7 +161,7 @@ interface FaceApiService {
     /**
      * 回调人脸检测
      */
-    fun onFaceDetect(callBack: Result<FaceDetectInfo>)
+    fun onFaceDetect(callBack: Result<List<FaceDetectDetail>>)
 
     /**
      * 比较两个人脸特征值
@@ -199,21 +198,7 @@ enum class DetectMode {
     RECOGNIZE_DETECT//识别检测
 
 }
-
-/**
- * 人脸节点信息，主要是检测人脸返回的信息
- */
-data class FaceDetectInfo(
-    val faceDetectDetails: List<FaceDetectDetail> = mutableListOf(),
-    val param: Any? = null
-) {
-
-}
-
 /**
  * 人脸检测的详细信息
  */
-data class FaceDetectDetail(val faceRect: Rect, val param: Any? = null) {
-
-
-}
+data class FaceDetectDetail(val faceRect: Rect, val param: Any? = null)
