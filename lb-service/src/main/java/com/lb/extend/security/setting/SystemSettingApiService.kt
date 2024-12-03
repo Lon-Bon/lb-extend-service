@@ -93,7 +93,7 @@ interface SystemSettingApiService {
     /**
      * 判断是否是前台应用
      */
-    fun isAppForeground(packageName: String)
+    fun isAppForeground(packageName: String): Boolean
 }
 
 
