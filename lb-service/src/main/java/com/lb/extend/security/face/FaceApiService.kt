@@ -66,7 +66,7 @@ interface FaceApiService {
         frameWidth: Int,
         frameHeight: Int,
         mode: DetectMode
-    ):List<FaceDetectDetail?> = mutableListOf()
+    ):List<FaceDetectDetail> = mutableListOf()
 
 
 
