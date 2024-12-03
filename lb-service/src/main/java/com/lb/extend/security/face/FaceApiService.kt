@@ -1,6 +1,7 @@
 package com.lb.extend.security.face
 
 import android.graphics.Rect
+import com.zclever.ipc.annotation.BigData
 import com.zclever.ipc.annotation.BindImpl
 import com.zclever.ipc.core.Result
 
@@ -48,6 +49,7 @@ interface FaceApiService {
      * @return result 销毁状态码
      */
     fun release(): Int
+
     /**
      * 人脸检测
      * 用于检测指定图像中的人脸位置等信息
@@ -59,11 +61,15 @@ interface FaceApiService {
      *
      */
     fun faceDetect(
+        @BigData
         frame: ByteArray,
         frameWidth: Int,
         frameHeight: Int,
         mode: DetectMode
-    ):FaceDetectInfo
+    ):List<FaceDetectDetail?> = mutableListOf()
+
+
+
 
     /**
      * 检测活体支持
@@ -74,6 +80,7 @@ interface FaceApiService {
      * @param faceRect 帧图像里面的人脸区域
      */
     fun antiSpoofingProcess(
+        @BigData
         frame: ByteArray,
         width: Int,
         height: Int,
@@ -88,6 +95,7 @@ interface FaceApiService {
      *
      */
     fun getFaceFeature(
+        @BigData
         frame: ByteArray,
         width: Int,
         height: Int
@@ -153,7 +161,7 @@ interface FaceApiService {
     /**
      * 回调人脸检测
      */
-    fun onFaceDetect(callBack: Result<FaceDetectInfo>)
+    fun onFaceDetect(callBack: Result<List<FaceDetectDetail>>)
 
     /**
      * 比较两个人脸特征值
@@ -176,6 +184,7 @@ interface FaceApiService {
     fun onDeletePerson(callBack: Result<Boolean>)
 
 
+
 }
 
 
@@ -189,21 +198,7 @@ enum class DetectMode {
     RECOGNIZE_DETECT//识别检测
 
 }
-
-/**
- * 人脸节点信息，主要是检测人脸返回的信息
- */
-data class FaceDetectInfo(
-    val faceDetectDetails: List<FaceDetectDetail> = mutableListOf(),
-    val param: Any? = null
-) {
-
-}
-
 /**
  * 人脸检测的详细信息
  */
-data class FaceDetectDetail(val faceRect: Rect, val param: Any? = null) {
-
-
-}
+data class FaceDetectDetail(val faceRect: Rect, val param: Any? = null)
