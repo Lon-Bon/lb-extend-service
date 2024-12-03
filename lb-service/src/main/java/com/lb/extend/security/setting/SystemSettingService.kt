@@ -122,11 +122,6 @@ interface SystemSettingService {
      */
     fun upgradeThirdPartyLBPackage(lbFilePath: String, vararg extras: String?)
 
-
-    /**
-     * 判断是否是前台应用
-     */
-    fun isAppForeground(packageName: String)
 }
 
 /**
