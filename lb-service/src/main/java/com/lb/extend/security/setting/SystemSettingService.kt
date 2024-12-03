@@ -122,7 +122,6 @@ interface SystemSettingService {
      */
     fun upgradeThirdPartyLBPackage(lbFilePath: String, vararg extras: String?)
 
-
 }
 
 /**

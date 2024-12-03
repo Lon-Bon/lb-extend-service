@@ -90,13 +90,10 @@ interface SystemSettingApiService {
      */
     fun setAdcBoost(number: Int): Int
 
-
     /**
      * 判断是否是前台应用
      */
     fun isAppForeground(packageName: String)
-
-
 }
 
 
