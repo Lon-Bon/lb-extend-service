@@ -58,6 +58,20 @@ interface SystemSettingService {
 
 
     /**
+     * 安装系统级app
+     * apkPath： apk文件的路径
+     */
+    fun installSystemApp(apkPath: String)
+
+
+    /**
+     * 卸载系统级app
+     * packageName： 包名
+     */
+    fun uninstallSystemApp(packageName: String)
+
+
+    /**
      * 静默卸载apk
      * packageName ： apk文件的包名
      */
@@ -92,12 +106,13 @@ interface SystemSettingService {
 
 
     /**
-     * 定时开关机
-     * @param mode   0/1   关机/开机
-     * @param ena   0/1    否/是 开启该功能
-     * @param time  18:30  时间
+     * 设置定时开关机，格式 HH:mm，24 小时制的时与分如 20:30，空字符串表示无关机时间设置
+     * 目前定制开关机的需求在瀚正悬浮窗有过，lonbon开关机设置暂时放在悬浮窗项目中实现
+     * 开机时间 enable 是否打开定时开关机
+     * @param onTime 开机时间  eg ： 05:18、25:30
+     * @param onTime 关机时间  eg ： 05:18、25:30
      */
-    fun powerOnOrOff(mode: Int, ena: Int, time: String)
+    fun powerOnOrOff(enable: Boolean, onTime: String, offTime: String)
 
 
     /**
@@ -122,20 +137,23 @@ interface SystemSettingService {
      */
     fun upgradeThirdPartyLBPackage(lbFilePath: String, vararg extras: String?)
 
+
+    /**
+     * 进入系统设置界面
+     */
+    fun goSystemSettingPage()
+
 }
 
 /**
  * Power on or off config  定时开关机数据
  *
- * @property powerOnSwitch  是否设置开机时间
+ * @property enable  是否设置开机时间
  * @property powerOnTime   开机时间
- * @property powerOffSwitch  是否设置关机时间
  * @property powerOffTime   关机时间
- * @constructor Create empty Power on or off config
  */
 data class PowerOnOrOffConfig(
-    val powerOnSwitch: Boolean,
-    val powerOnTime: String,
-    val powerOffSwitch: Boolean,
-    val powerOffTime: String,
+    val enable: Boolean,
+    val onTime: String,
+    val offTime: String,
 )

@@ -337,6 +337,19 @@ interface IntercomService {
      */
     fun setOnIntercomIOCallBack(callBack: Result<Int>?)
 
+
+    /**
+     * 开始录制视频
+     */
+    fun startRecordVideo()
+
+
+    /**
+     * 停止录制,回调文件的绝对路径
+     */
+    fun stopRecord(callBack: Result<String>)
+
+
 }
 
 
