@@ -52,9 +52,8 @@ interface SystemSettingService {
     /**
      * 静默安装apk
      * apkPath ： apk文件的绝对路径
-     * isReboot： 安装结束是否需要重启设备
      */
-    fun installApkSilently(apkPath: String, isReboot: Boolean)
+    fun installApkSilently(apkPath: String)
 
 
     /**
