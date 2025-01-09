@@ -52,22 +52,9 @@ interface SystemSettingService {
     /**
      * 静默安装apk
      * apkPath ： apk文件的绝对路径
+     * isSystemApp:  是否安装为系统级app
      */
-    fun installApkSilently(apkPath: String)
-
-
-    /**
-     * 安装系统级app
-     * apkPath： apk文件的路径
-     */
-    fun installSystemApp(apkPath: String)
-
-
-    /**
-     * 卸载系统级app
-     * packageName： 包名
-     */
-    fun uninstallSystemApp(packageName: String)
+    fun installApkSilently(apkPath: String, isSystemApp: Boolean)
 
 
     /**
