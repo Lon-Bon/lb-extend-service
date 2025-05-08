@@ -124,6 +124,7 @@ interface SystemSetService {
      */
     fun setDeviceDensity(density: Int)
 
-    //2024.09.30测试
+    //2025/5/8
+    fun alarm(type: Int)
 }
 
