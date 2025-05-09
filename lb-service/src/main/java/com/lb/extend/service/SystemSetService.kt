@@ -125,6 +125,14 @@ interface SystemSetService {
     fun setDeviceDensity(density: Int)
 
     //2025/5/8
+    /**
+     * 报警
+     * */
     fun alarm(type: Int)
+
+    /**
+     * 报警事件回调
+     * */
+    fun setAlarmCallBack(callBack : Result<List<AlarmEvent>>)
 }
 
