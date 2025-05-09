@@ -5,6 +5,7 @@ import com.lb.extend.command.DeviceParams
 import com.zclever.ipc.annotation.BindImpl
 
 import com.zclever.ipc.core.Result
+import com.lb.extend.command.AlarmEvent
 
 /**
  * 提供系统设置相关的服务
