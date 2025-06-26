@@ -350,6 +350,32 @@ interface IntercomService {
     fun stopRecord(callBack: Result<String>)
 
 
+    /**
+     * 初始化关键字报警功能，设置关键字报警触发回调
+     * callback会回调触发的关键字
+     */
+    fun initAndSetOnKeyAlarmCallBack(callBack: Result<String>)
+
+
+    /**
+     * 获取设备是否支持关键词识别报警功能，必须先调用initAndSetOnKeyAlarmCallBack方法之后再调用，否则返回未知-1
+     * 返回值： 1支持  0不支持  -1未知
+     */
+    fun getKeyAlarmSupport(): Int
+
+
+    /**
+     * 开始/停止关键字报警识别
+     */
+    fun switchKeyAlarm(open: Boolean)
+
+
+    /**
+     * 设置关键字字符串列表，实时生效，注意必须是中文字符！
+     * 1、当调用switchKeyAlarm(true)开启识别后，在设备周围喊出关键字Set中的一个，即可触发设备报警。
+     * 2、关键字建议设置重复词语，且容易熟记，例如：报警报警、救命救命，每组关键字建议6个字以内，两秒内可以读完
+     */
+    fun setKeyAlarmWords(keywords: Set<String>)
 }
 
 

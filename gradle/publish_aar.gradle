@@ -3,21 +3,31 @@ apply plugin: 'maven-publish'
 Properties localProperties = new Properties()
 localProperties.load(new FileInputStream(rootProject.getRootDir().getAbsolutePath() + "/local.properties"))
 
+def thirdPartAAR = ext.has('THIRD_PARTY_AAR') && THIRD_PARTY_AAR
+
+group = properties.getOrDefault("PUBLISH_GROUP", "com.lonbon.security")
+version = properties.getOrDefault("PUBLISH_VERSION", "1.0.0")
+def ARTIFACT_ID = properties.getOrDefault("PUBLISH_ARTIFACT_ID", project.name)
+
+/**
+ * 本地仓库url
+ */
 def MAVEN_LOCAL_PATH = properties.getOrDefault("MAVEN_LOCAL_PATH", "repo")
-def MAVEN_REPO_LOCAL_URL = MAVEN_LOCAL_PATH.startsWith("/") ? MAVEN_LOCAL_PATH : "$rootDir/$MAVEN_LOCAL_PATH"
+def mavenRepoLocalUrl = MAVEN_LOCAL_PATH.startsWith("/") ? MAVEN_LOCAL_PATH : "$rootDir/$MAVEN_LOCAL_PATH"
+
 def MAVEN_REPO_TYPE = properties.getOrDefault("MAVEN_REPO_TYPE", "LOCAL")
 def MAVEN_REMOTE_URL_RELEASE = properties.getOrDefault("MAVEN_REMOTE_URL_RELEASE", "http://voip.lonbon.com:8092/repository/maven-releases/")
 def MAVEN_REMOTE_URL_SNAPSHOT = properties.getOrDefault("MAVEN_REMOTE_URL_SNAPSHOT", "http://voip.lonbon.com:8092/repository/maven-snapshots/")
-def MAVEN_REMOTE_NAME = localProperties.getOrDefault("MAVEN_REMOTE_NAME", "")
-def MAVEN_REMOTE_PASSWORD = localProperties.getOrDefault("MAVEN_REMOTE_PASSWORD", "")
-def MAVEN_PUBLISH_GROUP = properties.getOrDefault("PUBLISH_GROUP", "com.lonbon")
-def MAVEN_PUBLISH_VERSION=  properties.getOrDefault("PUBLISH_VERSION", "1.0.0")
-group = MAVEN_PUBLISH_GROUP
-version = MAVEN_PUBLISH_VERSION
-println "group->${project.group}"
-println "version->${project.version}"
-def MAVEN_REPO_REMOTE_URL = project.version.contains("SNAPSHOT") ? MAVEN_REMOTE_URL_SNAPSHOT : MAVEN_REMOTE_URL_RELEASE
-println "MAVEN_REPO_REMOTE_URL->$MAVEN_REPO_REMOTE_URL"
+def MAVEN_REMOTE_NAME = localProperties.getOrDefault("MAVEN_REMOTE_NAME", "lb")
+def MAVEN_REMOTE_PASSWORD = localProperties.getOrDefault("MAVEN_REMOTE_PASSWORD", "Ll168888")
+
+
+/**
+ * 远程仓库url
+ */
+def mavenRepoRemoteUrl = project.version.contains("SNAPSHOT") ? MAVEN_REMOTE_URL_SNAPSHOT : MAVEN_REMOTE_URL_RELEASE
+
+println "groupId->${group},artifactId->${ARTIFACT_ID},versionId->${version},maven_repo_type->${MAVEN_REPO_TYPE},maven_url->${mavenRepoRemoteUrl}, thirdPartAAR->${thirdPartAAR}"
 
 task androidJavadocs(type: Javadoc) {
     source = android.sourceSets.main.java.sourceFiles
@@ -47,11 +57,15 @@ task androidSourcesJar(type: Jar) {
     }
 }
 
+//def libsAarFiles = fileTree(dir: 'libs', include: ['*.aar'])
+
 afterEvaluate {
+    def publishThirdPartAAR = thirdPartAAR
     publishing {
         repositories {
             maven {
-                setUrl(MAVEN_REPO_TYPE == "REMOTE" ? MAVEN_REPO_REMOTE_URL : MAVEN_REPO_LOCAL_URL)
+                allowInsecureProtocol true
+                setUrl(MAVEN_REPO_TYPE == "REMOTE" ? mavenRepoRemoteUrl : mavenRepoLocalUrl)
                 if (MAVEN_REPO_TYPE == "REMOTE") {
                     credentials {
                         username = MAVEN_REMOTE_NAME
@@ -62,11 +76,41 @@ afterEvaluate {
         }
 
         publications {
+
             release(MavenPublication) {
-                from components.release
-                artifactId = rootProject.name
-                artifact androidSourcesJar
+                if (publishThirdPartAAR) {
+                    groupId = project.group
+                    version = project.version
+                    artifactId = ARTIFACT_ID
+                    def aarFile = fileTree(dir: 'libs', include: ['*.aar'])[0]
+                    println "aarFile->${aarFile.absolutePath}"
+                    artifact(aarFile)
+                } else {
+                    from components.release
+                    groupId = project.group
+                    version = project.version
+                    artifactId = ARTIFACT_ID
+//                artifact androidJavadocsJar
+                    artifact androidSourcesJar
+                }
+
+
+//                pom.withXml {
+//                    def root = asNode()
+//                    def dependenciesNode = root.dependencies[0] ?: root.appendNode('dependencies')
+//
+//                    // 为每个 AAR 添加一个依赖传递
+//                    libsAarFiles.each { aarFile ->
+//                        def artifactId_suffix = aarFile.name.take(aarFile.name.lastIndexOf('.')).toLowerCase()
+//                        def dependencyNode = dependenciesNode.appendNode('dependency')
+//                        dependencyNode.appendNode('groupId', groupId)
+//                        dependencyNode.appendNode('artifactId', "$ARTIFACT_ID-${artifactId_suffix}")
+//                        dependencyNode.appendNode('version', version)
+//                        dependencyNode.appendNode('scope', 'compile')
+//                    }
+//                }
             }
         }
+
     }
 }
