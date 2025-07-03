@@ -101,6 +101,12 @@ interface SystemSettingService {
 
 
     /**
+     * 进入系统设置界面（翰正需要提供）
+     */
+    fun goSystemSettingPage()
+
+
+    /**
      * Get power on or off config 获取设备开关机信息
      *
      * @param dataCallBack
