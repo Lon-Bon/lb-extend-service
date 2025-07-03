@@ -90,14 +90,14 @@ interface SystemSettingService {
      */
     fun setEthernetInfo(ethernetIP: String?, ethernetNetMask: String?, ethernetGateWay: String?)
 
-
     /**
-     * 定时开关机
-     * @param mode   0/1   关机/开机
-     * @param ena   0/1    否/是 开启该功能
-     * @param time  18:30  时间
+     * 设置定时开关机，格式 HH:mm，24 小时制的时与分如 20:30，空字符串表示无关机时间设置
+     * 目前定制开关机的需求在瀚正悬浮窗有过，lonbon开关机设置暂时放在悬浮窗项目中实现
+     * 开机时间 enable 是否打开定时开关机
+     * @param onTime 开机时间  eg ： 05:18、25:30
+     * @param onTime 关机时间  eg ： 05:18、25:30
      */
-    fun powerOnOrOff(mode: Int, ena: Int, time: String)
+    fun powerOnOrOff(enable: Boolean, onTime: String, offTime: String)
 
 
     /**
