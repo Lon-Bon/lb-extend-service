@@ -129,18 +129,14 @@ interface SystemSettingService {
     fun upgradeThirdPartyLBPackage(lbFilePath: String, vararg extras: String?)
 }
 
+
 /**
- * Power on or off config  定时开关机数据
- *
- * @property powerOnSwitch  是否设置开机时间
- * @property powerOnTime   开机时间
- * @property powerOffSwitch  是否设置关机时间
- * @property powerOffTime   关机时间
- * @constructor Create empty Power on or off config
+ * enable	开机开关 false:未打开；true:已打开
+ * onTime	开机时间，例如：“18:00”、“09:05”
+ * offTime	关机时间，例如：“18:00”、“09:05”
  */
 data class PowerOnOrOffConfig(
-    val powerOnSwitch: Boolean,
-    val powerOnTime: String,
-    val powerOffSwitch: Boolean,
-    val powerOffTime: String,
+    val enable: Boolean,
+    val onTime: String,
+    val offTime: String,
 )
