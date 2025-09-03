@@ -30,7 +30,12 @@ interface FingerprintService {
     fun fingerprintRecognition()
 
     /**
-     * 停止指纹录入或指纹识别，如果不调用指纹模块会一直在工作，一般是在结果回调或离开界面时调用
+     * 指纹模块进入工作模式（指示灯亮），就会去提取指纹数据（图片特征值，指纹），根据action判断是获取特征值，还是比较特征值
+     */
+    fun start()
+
+    /**
+     * 停止指纹录入或指纹识别（指示灯灭），如果不调用指纹模块会一直在工作，一般是在结果回调或离开界面时调用
      */
     fun stop()
 
@@ -79,7 +84,55 @@ interface FingerprintService {
      * 清空本地所有指纹存储信息
      */
     fun clearAllFingerprint()
+    /**
+     * 指纹特征值创建接口
+     * @param img 指纹图片数据
+     * @param feature 根据图片数据生成的指纹特征结果
+     * @return 0成功，1设备未打开，2生成失败
+     */
+    fun fingerFeatureCreat(img: ByteArray, feature: ByteArray)
 
+    /**
+     * 回调指纹特征值创建
+     */
+    fun onFingerFeatureCreat(callBack: Result<ByteArray>)
+    /**
+     * 根据本地指纹图片注册指纹
+     * 传入一张指纹图片路径，注册指纹
+     * @param path 指纹路径
+     * @param feature 指纹特征值提取返回结果，直接传new byte[512]
+     * @return  0 成功，1 设备未打开，2 提取失败，3其他
+     */
+    fun autoRegisterFromFile(path: String, feature: ByteArray)
+    /**
+     * 回调图片注册指纹
+     */
+    fun onAutoRegisterFromFile(callBack: Result<ByteArray>)
+    /**
+     * 指纹1：1比对接口
+     * 指纹识别
+     * @param path1 指纹1路径
+     * @param path2 指纹2路径
+     * @param similarity 相似度
+     * @return 0 成功，1 设备未打开，2 未注册，3识别失败
+     */
+    fun fringerCompare(path1: String, path2: String, similarity: FloatArray)
+
+    /**
+     * 回调指纹1：1比对接口
+     */
+    fun onFringerCompare(callBack: Result<Float>)
+
+    /**
+     *  指纹探测
+     *  用于监测指纹是否按压
+     *  @return 0未按压指纹，1设备未打开，2检测到指纹按压
+     */
+    fun  isFingerPress()
+    /**
+     * 回调指纹1：1比对接口
+     */
+    fun onIsFingerPress(callBack: Result<Boolean>)
 }
 
 /**
@@ -88,16 +141,18 @@ interface FingerprintService {
  * @property feature String 指纹特征值
  * @constructor
  */
-data class FingerprintFeatureResult(val id: String, val feature: String)
+data class FingerprintFeatureResult(val id: String, val feature: String, val fingerprintBase64Str: String?)
 
 /**
  * 指纹录入剩余未采集指纹数量的回调结果
  * @property leftCounts Int 差几个指纹没录入（如果leftCounts为0，则会回调FingerprintFeatureResult）
+ * @property feature String 指纹特征值
  * @property fingerprintBase64Str String? 当前录入指纹的图片的base64的字符串（暂未支持）
  * @constructor
  */
 data class FingerprintLeftNumResult(
     val leftCounts: Int,
+    val feature: String,
     val fingerprintBase64Str: String?
 )
 

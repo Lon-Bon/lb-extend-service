@@ -4,14 +4,29 @@ plugins {
     id 'kotlin-kapt'
     id 'com.github.dcendents.android-maven'
 }
+import java.text.SimpleDateFormat
 
-//properties.put("MAVEN_REPO_TYPE","REMOT")
-//
-//group = PUBLISH_GROUP
+static String formatCurrentTime() {
+    def currentTime = new Date()
+    def dateFormat = new SimpleDateFormat("yyyyMMddHHmm")
+    return dateFormat.format(currentTime)
+}
 
-//version = PUBLISH_VERSION
-//
-//apply from: '../gradle/publish_aar.gradle'
+def getVersionName = {
+    boolean needDebug = file('debug').exists()//仅仅只是调试使用，debug文件.gitignore忽略了，如果是调试则发布快照版本
+    def version = (needDebug ? "${formatCurrentTime()}-SNAPSHOT" : formatCurrentTime())
+    return version
+}
+
+def publish_aar_file = new File("${rootDir.absolutePath}/gradle", "publish_aar.gradle")
+
+if (publish_aar_file.exists()) {
+    PUBLISH_GROUP = "com.github.Lon-Bon"
+    PUBLISH_VERSION = getVersionName()
+    println("PUBLISH_VERSION:" + PUBLISH_VERSION)
+    PUBLISH_ARTIFACT_ID = "lb-extend-service"
+    apply from: publish_aar_file
+}
 
 android {
     compileSdkVersion 30
@@ -21,7 +36,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
-        versionName "1.7.1-SNAPSHOT"
+        versionName getVersionName()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
