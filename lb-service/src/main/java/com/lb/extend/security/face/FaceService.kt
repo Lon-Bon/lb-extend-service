@@ -164,7 +164,7 @@ data class CompareResult(
     val jpegByte: ByteArray? = null
 )
 
-data class EnrollResult(val code: String, val msgCode: Int, val imgPathList: String)
+data class EnrollResult(val code: String, val msgCode: Int, val imgPathList: String, val jpegByte: ByteArray? = null)
 data class EnrollImgBatchResult(val SuccessCodes: List<String>, val msgCode: Int)
 data class RectBean(val left: Int, val top: Int, val right: Int, val bottom: Int)
 data class FaceDetectResult(val width: Int, val height: Int, val rectList: List<RectBean>)
