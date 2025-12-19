@@ -46,37 +46,25 @@ data class CardData(val cardNum: String)
 /**
  * 清华国密卡信息
  * QHCardInfo{
- *   ucCardSSN:0DEA0BD7A0EF0F25;
- *   cStudentID:2024a001;
- *   cChineseName:wei xiao li;
- *   cEnglishName:Ailx;
- *   cDeptCode:TSG002;
- *   cDeptName:The Second Library;
- *   cValidDate:2028-8-10;
- *   ulLogicCardNo:ab4130;
- *   ucTypeCode:2;
- *   cTypeName:employee;
- *   ucPSAMSN:123;
- *   ucDoorRights:536871532;
- *   cCardValidPeriod:2026-12-30;
- *   usMaxOpenTimes:10000;
- *   usRemainOpenTimes:8868;
+ *   ucCardSSN:0F4D42957A4368AC:
+ *   ucCardASN:00018899609C0E3A:
+ *   ucPsamSN:AA010001889960019804-
+ *   cStudentID:3139393639393030323000000000000000000000
+ *   cChineseName:'CDF5BDA8EABF0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+ *   cEnglishName:57616E67204A69616E78696E0000000000000000000000000000000000000000000000000000000000000000000000000000
+ *   cDeptCode:00000000000015:
+ *   ulLogicCardNo:0013418B;
+ *   cCardValidPeriod:20430331:
  * }
  */
 data class QHCardInfo(
-    val ucCardSSN: String,          // 安全序列号
-    val cStudentID: String,         // 学工号
-    val cEnglishName: String,       // 英文姓名
-    val cChineseName: String,       // 中文姓名
-    val cDeptCode: String,          // 单位代码
-    val cDeptName: String,          // 单位名称
-    val cValidDate: String,         // 身份有效期
-    val ulLogicCardNo: String,      // 逻辑卡号
-    val ucTypeCode: String,         // 类型代码
-    val cTypeName: String,          // 类型名称
-    val ucPSAMSN: String,           // PSAM卡序列号
-    val ucDoorRights: String,       // 门禁权限
-    val cCardValidPeriod: String,   // 卡片有效期
-    val usMaxOpenTimes: String,     // 可开门次数
-    val usRemainOpenTimes: String   // 剩余开门次数
+    val ucCardSSN: String,          // 校园卡安全序列号
+    val ucCardASN: String,         // 校园卡应用序列号
+    val ucPsamSN: String,       // PASM卡应用序列号
+    val cStudentID: String,       // 学工号  ASC11码
+    val cChineseName: String,          // 中文姓名   GBK编码
+    val cEnglishName: String,          // 英文姓名   ASC11码
+    val cDeptCode: String,         // 单位代码  BCD编码
+    val ulLogicCardNo: String,      // 逻辑卡号  四个字节转整形数字，范围1000000至2000000
+    val cCardValidPeriod: String,         // 校园卡有效日期  BCD编码
 )
