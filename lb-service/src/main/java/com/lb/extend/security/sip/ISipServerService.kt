@@ -31,19 +31,19 @@ interface ISipServerService {
      * 获取sip注册账号
      * @return String
      */
-    fun getSipUsername():String
+    fun getSipUsername(): String
 
     /**
      * 获取sip账号 显示名
      * @return String
      */
-    fun getSipDisplayName():String
+    fun getSipDisplayName(): String
 
     /**
      *
      * @return Boolean -1 注销成功 0 注册失败 1 注册成功
      */
-    fun isSipRegisterState():Int
+    fun isSipRegisterState(): Int
 
 
     /**
@@ -52,7 +52,7 @@ interface ISipServerService {
      * @return String 异常的提示
      * @param dataType Int 设备 类型 2 默认是 sip 3 手机号码 4 固话
      */
-    fun sipCall(sipNum:String,dataType:Int):String
+    fun sipCall(sipNum: String?, dataType: Int = 2): String
 
     /**
      * sip接听
@@ -60,7 +60,7 @@ interface ISipServerService {
      * @param dataType Int 设备 类型 2 默认是 sip 3 手机号码 4 固话
      * @return String
      */
-    fun sipAnswer(sipNum:String,dataType:Int):String
+    fun sipAnswer(sipNum: String?, dataType: Int=2): String
 
     /**
      * sip挂断
@@ -68,7 +68,7 @@ interface ISipServerService {
      * @param dataType Int 设备 类型 2 默认是 sip 3 手机号码 4 固话
      * @return String
      */
-    fun sipHangup(sipNum:String,dataType:Int):String
+    fun sipHangup(sipNum: String?, dataType: Int=2): String
 
     /**
      * sip 语音呼叫
@@ -76,7 +76,7 @@ interface ISipServerService {
      * @return String 异常的提示
      * @param dataType Int 设备 类型 2 默认是 sip 3 手机号码 4 固话
      */
-    fun sipAudioCall(sipNum:String,dataType:Int):String
+    fun sipAudioCall(sipNum: String?, dataType: Int=2): String
 
 
 }
