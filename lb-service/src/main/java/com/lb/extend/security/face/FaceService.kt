@@ -135,6 +135,11 @@ interface FaceService {
      * 图片识别结果回调
      */
     fun onFaceVerifyByImg(callBack: Result<CommonFaceResult>)
+
+    /**
+     * 开关人脸识别提示词
+     */
+    fun switchFaceVerifyHint(open: Int)
 }
 
 const val FACE_SDK_FREE = 0 //人脸SDK空闲可用
