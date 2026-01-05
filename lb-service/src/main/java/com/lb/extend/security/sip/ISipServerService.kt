@@ -60,7 +60,8 @@ interface ISipServerService {
      * @param dataType Int 设备 类型 2 默认是 sip 3 手机号码 4 固话
      * @return String
      */
-    fun sipAnswer(sipNum: String?, dataType: Int = 2): String
+    fun sipAnswer(sipNum: String?, dataType: Int=2): String
+
 
     /**
      * sip挂断
@@ -68,7 +69,7 @@ interface ISipServerService {
      * @param dataType Int 设备 类型 2 默认是 sip 3 手机号码 4 固话
      * @return String
      */
-    fun sipHangup(sipNum: String?, dataType: Int = 2): String
+    fun sipHangup(sipNum: String?, dataType: Int=2): String
 
     /**
      * sip 语音呼叫
@@ -76,7 +77,7 @@ interface ISipServerService {
      * @return String 异常的提示
      * @param dataType Int 设备 类型 2 默认是 sip 3 手机号码 4 固话
      */
-    fun sipAudioCall(sipNum: String?, dataType: Int = 2): String
+    fun sipAudioCall(sipNum: String?, dataType: Int=2): String
 
 
 }
