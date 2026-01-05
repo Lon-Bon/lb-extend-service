@@ -135,6 +135,11 @@ interface FaceService {
      * 图片识别结果回调
      */
     fun onFaceVerifyByImg(callBack: Result<CommonFaceResult>)
+
+    /**
+     * 开关人脸识别提示词
+     */
+    fun switchFaceVerifyHint(open: Int)
 }
 
 const val FACE_SDK_FREE = 0 //人脸SDK空闲可用
@@ -164,7 +169,7 @@ data class CompareResult(
     val jpegByte: ByteArray? = null
 )
 
-data class EnrollResult(val code: String, val msgCode: Int, val imgPathList: String)
+data class EnrollResult(val code: String, val msgCode: Int, val imgPathList: String, val jpegByte: ByteArray? = null)
 data class EnrollImgBatchResult(val SuccessCodes: List<String>, val msgCode: Int)
 data class RectBean(val left: Int, val top: Int, val right: Int, val bottom: Int)
 data class FaceDetectResult(val width: Int, val height: Int, val rectList: List<RectBean>)

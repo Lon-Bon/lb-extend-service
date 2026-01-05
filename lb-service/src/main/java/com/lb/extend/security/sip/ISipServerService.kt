@@ -62,6 +62,7 @@ interface ISipServerService {
      */
     fun sipAnswer(sipNum: String?, dataType: Int=2): String
 
+
     /**
      * sip挂断
      * @param sipNum String sip账号
