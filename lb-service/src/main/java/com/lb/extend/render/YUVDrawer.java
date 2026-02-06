@@ -17,7 +17,7 @@ import java.nio.FloatBuffer;
  */
 public class YUVDrawer {
 
-    private final String TAG = "YUVDrawer";
+    private final String TAG = YUVDrawer.class.getSimpleName();
     // program id
     private int program;
     // texture id
@@ -93,10 +93,21 @@ public class YUVDrawer {
         isProgramBuilt = true;
     }
 
+
+    private void setTextureParameters() {
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
+    }
+
     /**
      * build a set of textures, for RGB
      */
     public void buildTextures(Buffer y, Buffer uv, int width, int height) {
+        // 设置像素对齐，处理非2的幂次方纹理
+        GLES20.glPixelStorei(GLES20.GL_UNPACK_ALIGNMENT, 1);
+
         boolean videoSizeChanged = (width != videoWidth || height != videoHeight);
         if (videoSizeChanged) {
             videoWidth = width;
@@ -104,49 +115,49 @@ public class YUVDrawer {
             Log.d(TAG, "buildTextures videoSizeChanged: w=" + videoWidth + " h=" + videoHeight);
         }
 
-        // building texture for Y data
+        // 验证尺寸
+        if (videoWidth % 2 != 0 || videoHeight % 2 != 0) {
+            Log.w(TAG, "Warning: YUV420 requires even dimensions");
+        }
+
+        // 计算UV纹理尺寸
+        int uvWidth = videoWidth / 2;
+        int uvHeight = videoHeight / 2;
+
+        // 构建Y纹理
         if (yTextureId < 0 || videoSizeChanged) {
             if (yTextureId >= 0) {
                 GLES20.glDeleteTextures(1, new int[]{yTextureId}, 0);
-                checkGlError("glDeleteTextures");
             }
-            // GLES20.glPixelStorei(GLES20.GL_UNPACK_ALIGNMENT, 1);
             int[] textures = new int[1];
             GLES20.glGenTextures(1, textures, 0);
-            checkGlError("glGenTextures");
             yTextureId = textures[0];
         }
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, yTextureId);
-        checkGlError("glBindTexture");
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_LUMINANCE, videoWidth, videoHeight, 0,
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_LUMINANCE,
+                videoWidth, videoHeight, 0,
                 GLES20.GL_LUMINANCE, GLES20.GL_UNSIGNED_BYTE, y);
-        checkGlError("glTexImage2D");
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
+        // 设置纹理参数
+        setTextureParameters();
 
-        // building texture for UV data
+        // 构建UV纹理（NV21格式）
         if (uvTextureId < 0 || videoSizeChanged) {
             if (uvTextureId >= 0) {
                 GLES20.glDeleteTextures(1, new int[]{uvTextureId}, 0);
-                checkGlError("glDeleteTextures");
             }
             int[] textures = new int[1];
             GLES20.glGenTextures(1, textures, 0);
-            checkGlError("glGenTextures");
             uvTextureId = textures[0];
         }
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, uvTextureId);
-        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_LUMINANCE_ALPHA, videoWidth / 2, videoHeight / 2, 0,
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_LUMINANCE_ALPHA,
+                uvWidth, uvHeight, 0,
                 GLES20.GL_LUMINANCE_ALPHA, GLES20.GL_UNSIGNED_BYTE, uv);
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
-        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
+        setTextureParameters();
 
+        // 恢复默认对齐
+        GLES20.glPixelStorei(GLES20.GL_UNPACK_ALIGNMENT, 4);
     }
-
     /**
      * render the frame
      * the YUV data will be converted to RGB by shader.
