@@ -140,6 +140,11 @@ interface FaceService {
      * 开关人脸识别提示词
      */
     fun switchFaceVerifyHint(open: Int)
+
+    /**
+     * 开关人脸识别多人检测
+     */
+    fun switchMultiFaceVerify(open: Int)
 }
 
 const val FACE_SDK_FREE = 0 //人脸SDK空闲可用
