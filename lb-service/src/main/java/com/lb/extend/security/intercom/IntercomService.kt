@@ -376,6 +376,16 @@ interface IntercomService {
      * 2、关键字建议设置重复词语，且容易熟记，例如：报警报警、救命救命，每组关键字建议6个字以内，两秒内可以读完
      */
     fun setKeyAlarmWords(keywords: Set<String>)
+
+    /**
+     * 添加如厕门灯
+     */
+    fun addAndShowDoorLampToilet(doorLampColor: Int)
+
+    /**
+     * 移除如厕门灯
+     */
+    fun removeToiletLamp()
 }
 
 
