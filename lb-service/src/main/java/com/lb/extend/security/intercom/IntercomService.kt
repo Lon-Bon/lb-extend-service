@@ -390,7 +390,7 @@ interface IntercomService {
     /**
      * 获取来邦配置
      */
-    fun getLBConfig(key : String)
+    fun getLBConfig(key : String): String
 
     /**
      * 设置来邦配置
