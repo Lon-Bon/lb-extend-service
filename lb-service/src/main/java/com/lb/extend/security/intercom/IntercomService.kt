@@ -386,6 +386,21 @@ interface IntercomService {
      * 移除如厕门灯
      */
     fun removeToiletLamp()
+
+    /**
+     * 获取来邦配置
+     */
+    fun getLBConfig(key : String)
+
+    /**
+     * 设置来邦配置
+     */
+    fun setLBConfig(key : String, value : String)
+
+    /**
+     * 保存来邦配置
+     */
+    fun saveLBConfig()
 }
 
 
