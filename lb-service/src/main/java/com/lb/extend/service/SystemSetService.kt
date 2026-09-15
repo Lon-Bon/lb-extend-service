@@ -125,22 +125,6 @@ interface SystemSetService {
      */
     fun setDeviceDensity(density: Int)
 
-    /**
-     * 设置应用"安装未知应用"权限
-     * 对应：设置 > 应用和通知(应用管理) > 特殊应用权限 > 安装未知应用
-     *
-     * @param packageName 目标应用包名
-     * @param enable true 允许安装未知来源应用，false 禁止
-     */
-    fun setInstallUnknownApps(packageName: String, enable: Boolean)
-
-    /**
-     * 获取应用"安装未知应用"权限状态
-     * @param packageName 目标应用包名
-     * @return true 已允许，false 未允许
-     */
-    fun isInstallUnknownAppsAllowed(packageName: String): Boolean
-
     //2025/5/8
     /**
      * 报警
