@@ -132,6 +132,19 @@ interface SystemSettingService {
      * 设置应用"安装未知应用"权限
      * 对应：设置 > 应用和通知(应用管理) > 特殊应用权限 > 安装未知应用
      *
+     * 【注意：禁止时目标应用会被系统杀掉，属预期行为，不是崩溃】
+     * enable = false 且权限状态由"允许"翻转为"禁止"时，Android 系统（AppOpsService）会主动
+     * SIGKILL 杀掉 packageName 对应的应用进程，随后自动重新拉起。Logcat 表现为：
+     *   I/ActivityManager: Killing <pid>:<packageName> (adj 0): REQUEST_INSTALL_PACKAGES changed.
+     *   I/libprocessgroup: Successfully killed process cgroup uid <uid> pid <pid>
+     *   I/Zygote: Process <pid> exited due to signal 9 (Killed)
+     * 该行为由 AOSP 实现（app-op 变化会改变应用的 OBB 挂载视图/安装权限状态，系统靠杀进程保证
+     * 新状态生效），本接口不会抛异常，也不会有 FATAL EXCEPTION / AndroidRuntime 堆栈，
+     * `logcat -b crash` 为空 —— 看到目标应用消失/重启时请勿误判为代码崩溃。
+     *
+     * 只有状态真正翻转（允许 -> 禁止）才触发；重复设置到同一状态不会杀进程。
+     * 注意：若 packageName 传的是调用方自己，调用方进程会一并被杀并重启。
+     *
      * @param packageName 目标应用包名
      * @param enable true 允许安装未知来源应用，false 禁止
      */
