@@ -28,7 +28,7 @@ public class YUVGLRenderer implements GLSurfaceView.Renderer {
     private ByteBuffer uv;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public YUVGLRenderer(GLSurfaceView surface, int videoWidth,int videoHeight) {
+    public YUVGLRenderer(GLSurfaceView surface, int videoWidth, int videoHeight) {
         mTargetSurface = surface;
         // 设置OpenGl ES的版本为2.0
         mTargetSurface.setEGLContextClientVersion(2);
@@ -81,7 +81,7 @@ public class YUVGLRenderer implements GLSurfaceView.Renderer {
     /**
      * 更新视频宽高
      */
-    public void updateWH(int w, int h) {
+    public synchronized void updateWH(int w, int h) {
         if (w > 0 && h > 0) {
             // 初始化容器
             if (w != mVideoWidth && h != mVideoHeight) {
@@ -100,16 +100,19 @@ public class YUVGLRenderer implements GLSurfaceView.Renderer {
     /**
      * 更新yuv数据
      */
-    public void updateYUVData(byte[] yuvData, int pixLength) {
-        synchronized (this) {
-            y.clear();
-            uv.clear();
+    public synchronized void updateYUVData(byte[] yuvData, int pixLength) {
 
-            y.put(yuvData, 0, pixLength).position(0);
-            uv.put(yuvData, pixLength, pixLength >> 1).position(0);
-            // request to render
-            mTargetSurface.requestRender();
+        if (y.remaining() < pixLength || uv.remaining() < pixLength >> 1) {
+            return;
         }
+
+        y.clear();
+        uv.clear();
+
+        y.put(yuvData, 0, pixLength).position(0);
+        uv.put(yuvData, pixLength, pixLength >> 1).position(0);
+        // request to render
+        mTargetSurface.requestRender();
     }
 
 
