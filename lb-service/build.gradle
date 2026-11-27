@@ -60,8 +60,8 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.google.code.gson:gson:2.8.7'
-    api 'com.github.zhanggaoming.android-ipc:ipc-core:v3.1.6'
-    kapt 'com.github.zhanggaoming.android-ipc:ipc-compiler:v3.1.6'
+    api 'com.github.Lon-Bon.android-ipc:ipc-core:4.0.0'
+    kapt 'com.github.Lon-Bon.android-ipc:ipc-compiler:4.0.0'
 }
 
 
